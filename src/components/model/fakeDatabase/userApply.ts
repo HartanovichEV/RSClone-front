@@ -58,7 +58,7 @@ export const dataUserApply: ApplyWithLogin[] = [
   {
     login: 'Юля',
     avatar: svetlanaAva,
-    category: Category.сhildren,
+    category: Category.children,
     format: Format.ofline,
     country: Country.russia,    
     description: 'нужна помощь детям сиротам: игрушки, одежда, предметы первой необходимости', 

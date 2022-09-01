@@ -12,6 +12,7 @@ import getFilter from '../../utils/filters';
 import Modal from '../../view/modal/modal';
 import { rating } from '../../model/fakeDatabase/rating';
 import { Rating } from '../../model/type/type';
+import { nextPrev, showTab } from '../../utils/form';
 
 function userPageRequests(): void {
   const main = document.querySelector('main') as HTMLElement;
@@ -119,13 +120,6 @@ function disableInputs(): void {
   address.disabled = true;
 }
 
-function enableTelInput(): void {
-  const telInput = document.getElementById('tel') as HTMLInputElement;
-
-  if (telInput.disabled) telInput.disabled = false;
-  else telInput.disabled = true;
-}
-
 export function openRegisterWindowListener(): void {
   const registerBtn = document.getElementById('register') as HTMLButtonElement;
   const registerSpan = document.getElementById('registerSpan') as HTMLSpanElement;
@@ -196,24 +190,24 @@ export function authSubmitListener() {
 }
 
 export function createRequestListener(): void {
-  const requestForm = document.getElementById('requestForm') as HTMLFormElement;
+  const requestForm = document.getElementById('regForm') as HTMLFormElement;
   requestForm.addEventListener('submit', getRequestFormData);
 }
 export function renderUserPageRequests(): void {
   const requestsBtn = document.querySelector('.buttons-section__btn-requests') as HTMLButtonElement;
-
   requestsBtn.addEventListener('click', userPageRequests);
+  console.log('show');
+  showTab(0);
+  const prevBtn = document.getElementById('prevBtn') as HTMLElement;
+  const nextBtn = document.getElementById('nextBtn') as HTMLElement;
+  prevBtn.addEventListener('click', function () { nextPrev(-1); });
+  nextBtn.addEventListener('click', function () { nextPrev(1); });
 }
 
 export function openUserRequestListener(): void {
   const openRequestBtn = document.querySelector('.buttons-section__btn-apply') as HTMLButtonElement;
 
   openRequestBtn.addEventListener('click', showRequest);
-}
-
-export function checkboxPhoneListener(): void {
-  const phoneBtn = document.getElementById('phone') as HTMLInputElement;
-  phoneBtn.addEventListener('click', enableTelInput);
 }
 
 export function globalCloseModal(): void {
@@ -293,7 +287,6 @@ export function addUserListeners(): void {
   renderUserPageRequests();
   openUserRequestListener();
   closeModalWindowListener();
-  checkboxPhoneListener();
   globalCloseModal();
   openUserCloseRequestListener();
   logoutListener();

@@ -10,7 +10,3 @@ export function showMessage(textMessage: string, error = false) {
     document.body.removeChild(message);
   }, 4000);
 }
-
-
-// Подключаем так:
-//слушатель.addEventListener('событие', function (){ showMessage('hello word'); });

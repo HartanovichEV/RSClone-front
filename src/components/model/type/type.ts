@@ -26,7 +26,7 @@ export enum Category {
   emergency = 'ЧС',
   veterans = 'Пенсионеры',
   invalid = 'Люди с ОВС',
-  сhildren = 'Дети и подростки',
+  children = 'Дети/подростки',
   animal = 'Животные',
   nature = 'Природа',
   science = 'Наука',

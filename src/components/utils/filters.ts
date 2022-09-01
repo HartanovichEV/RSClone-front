@@ -9,7 +9,7 @@ export let filterCategoryChosen = {
   emergency: false,
   veterans: false,
   invalid: false,
-  сhildren: false,
+  children: false,
   animal: false,
   nature: false,
   science: false,
@@ -132,7 +132,7 @@ export default function getFilter(e: Event) {
       invalid.classList.toggle('color-btn');
       break;
     case сhildren:
-      filterCategoryChosen.сhildren = filterCategoryChosen.сhildren ? false : true;
+      filterCategoryChosen.children = filterCategoryChosen.children ? false : true;
       сhildren.classList.toggle('color-btn');
       break;
     case animal:

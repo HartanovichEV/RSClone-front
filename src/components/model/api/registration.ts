@@ -28,7 +28,7 @@ export async function registerRequest(user: User) {
       },
       body: JSON.stringify(user),
     });
-    const result = await response.json();
+    //const result = await response.json();
     if (response.status === 201) {
       showMessage('Пользователь успешно зарегистрирован');
     } else showMessage(`Ошибка ${response.status}`, true);
