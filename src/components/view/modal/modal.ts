@@ -120,22 +120,31 @@ export default class Modal {
         
         <div class="tab">Локация и дата оказания помощи:
           <div class="request-location">
-          <div class="__select select1" data-state="">
-          <div class="__select__title"></div>
-          <div class="__select__content">
-            <input id="singleSelect10" class="__select__input" type="radio" name="singleSelect" />
-            <label for="singleSelect10" tabindex="0" class="__select__label" data-value="${Country.belarus}"></label>
-            <input id="singleSelect11" class="__select__input" type="radio" name="singleSelect" />
-            <label for="singleSelect11" tabindex="0" class="__select__label" data-value="${Country.russia}"></label>
-            <input id="singleSelect12" class="__select__input" type="radio" name="singleSelect" />
-            <label for="singleSelect12" tabindex="0" class="__select__label" data-value="${Country.ukraine}"></label>
-          </div>
-        </div>
-            <input class="request-location__select-input" disabled name="address"
+          <div class="request-radio__inputs">
+            <label class="request-radio__inputs-label" for="online">
+              <input class="request-radio__inputs-input" type="radio" 
+              name="format" id="belarus" value="${Country.belarus}">
+              <span class="request-radio__inputs-custom"></span>
+              <span class="request-radio__inputs-span">${Country.belarus}</span>
+            </label>        
+            <label class="request-radio__inputs-label" for="offline">
+              <input class="request-radio__inputs-input" type="radio" 
+              name="format" id="russia" value="${Country.russia}">
+              <span class="request-radio__inputs-custom"></span>
+              <span class="request-radio__inputs-span">${Country.russia}</span>
+            </label>
+            <label class="request-radio__inputs-label" for="offline">
+              <input class="request-radio__inputs-input" type="radio" 
+              name="format" id="ukraine" value="${Country.ukraine}">
+              <span class="request-radio__inputs-custom"></span>
+              <span class="request-radio__inputs-span">${Country.ukraine}</span>
+            </label>
+            </div>
+            <input class="request-location__select-input" name="address"
               type="text" placeholder="Адрес" autocomplete="off" id="address">
             <input class="request-location__select-input" name="time"
               type="text" placeholder="Дата и время" autocomplete="off" id="time">
-          </div>
+          </div>          
         </div>
         
         <div class="tab">Опишите суть проблемы и необходимую помощь:

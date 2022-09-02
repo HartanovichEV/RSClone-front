@@ -3,7 +3,6 @@ function selectSingleCategory() {
   const selectSingle = document.querySelector('.__select') as HTMLElement;
   const selectSingleTitle = selectSingle.querySelector('.__select__title')  as HTMLElement;
   const selectSingleLabels: NodeListOf<Element> = selectSingle.querySelectorAll('.__select__label');
-  console.log(selectSingle);
   // Toggle menu
   selectSingleTitle.addEventListener('click', () => {
     
@@ -72,8 +71,7 @@ export function nextPrev(n:number) {
     (document.getElementById('regForm') as HTMLFormElement).submit();
     return false;
   }  
-  showTab(currentTab);
-  
+  showTab(currentTab);  
 }
 //showTab(currentTab); 
 
