@@ -75,7 +75,7 @@ export default class Modal {
         <form id="regForm" action="">        
         <h1>Создание заявки на волонтерскую помощь</h1>
         <div class="tab">Выберите категорию и формат проведения:
-        <div class="__select select1" data-state="">
+        <div class="__select" data-state="">
           <div class="__select__title"></div>
           <div class="__select__content">
             <input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" />
@@ -120,14 +120,17 @@ export default class Modal {
         
         <div class="tab">Локация и дата оказания помощи:
           <div class="request-location">
-            <div class="select-wrapper">            
-              <select class="request-location__select select" name="location" id="location">
-                <option value="country" selected>Страна</option>
-                <option value="belarus">${Country.belarus}</option>
-                <option value="russia">${Country.russia}</option>
-                <option value="ukraine">${Country.ukraine}</option>
-              </select>
-            </div>
+          <div class="__select select1" data-state="">
+          <div class="__select__title"></div>
+          <div class="__select__content">
+            <input id="singleSelect10" class="__select__input" type="radio" name="singleSelect" />
+            <label for="singleSelect10" tabindex="0" class="__select__label" data-value="${Country.belarus}"></label>
+            <input id="singleSelect11" class="__select__input" type="radio" name="singleSelect" />
+            <label for="singleSelect11" tabindex="0" class="__select__label" data-value="${Country.russia}"></label>
+            <input id="singleSelect12" class="__select__input" type="radio" name="singleSelect" />
+            <label for="singleSelect12" tabindex="0" class="__select__label" data-value="${Country.ukraine}"></label>
+          </div>
+        </div>
             <input class="request-location__select-input" disabled name="address"
               type="text" placeholder="Адрес" autocomplete="off" id="address">
             <input class="request-location__select-input" name="time"
