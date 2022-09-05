@@ -28,8 +28,9 @@ function createDivMyRequestCard(data: ApplyWithUser) {
 } 
 
 export default function getPageMyRequests(myApplies: ApplyWithUser[] ) {
-  const cardRequests = document.querySelector('.card-requests') as HTMLButtonElement;  
-  if (myApplies.length === 0) cardRequests.innerHTML = 'У Вас пока нет заявок. Нажмите на + для добавления.';
+  const cardRequests = document.querySelector('.card-requests') as HTMLButtonElement;
+  if (myApplies.length === 0) cardRequests.innerHTML = 'У вас пока нет заявок. Нажмите на + для добавления.';
+
   for (let i = 0; i < myApplies.length; i++) {              
     const div = createDivMyRequestCard(myApplies[i]);
     if (div) cardRequests.appendChild(div); 

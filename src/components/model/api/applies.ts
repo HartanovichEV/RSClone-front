@@ -15,8 +15,22 @@ export async function  getApplies() {
 }
 
 
+export async function  getApply(applyId: number) : Promise<Apply[]> {
+  try {
+    const response = await fetch(`${SERVER}/apply/${applyId}`);
+    const result : Apply[] = await response.json();
+    return result;
+  } catch (err) {
+    if (err instanceof Error)
+      return [];   
+  }
+  return [];
+}
+
+
 export async function  createApply(apply: Apply) {
   try {
+    console.log(apply);
     const token = localStorage.getItem('token');
     const response = await fetch(`${SERVER}/apply`, {
       method: 'POST',
@@ -27,15 +41,15 @@ export async function  createApply(apply: Apply) {
       body: JSON.stringify(apply),
     });
     if (response.status === 200) {
-      showMessage('Заявка успешно создана');
-    } else showMessage(`Ошибка ${response.status}`, true);
+      return showMessage('Заявка успешно создана');
+    } else return  showMessage(`Ошибка ${response.status}`, true);
   } catch (err) {
     if (err instanceof Error)
-      showMessage('Проблемы с подключением к серверу', true);
+      return showMessage('Проблемы с подключением к серверу', true);
   }
 }
 
-export async function  closeApply(applyId: number) {
+export async function  closeApply(applyId: number, message = 'Заявка успешно закрыта') {
   try {
     const token = localStorage.getItem('token');
     const response = await fetch(`${SERVER}/apply/${applyId}`, {
@@ -46,7 +60,7 @@ export async function  closeApply(applyId: number) {
       },
     });
     if (response.status === 200) {
-      showMessage('Заявка успешно закрыта');
+      showMessage(message);
     } else showMessage(`Ошибка ${response.status}`, true);
   } catch (err) {
     if (err instanceof Error)

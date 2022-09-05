@@ -44,13 +44,13 @@ export enum Category {
   healthcare = 'Здравоохранение',
   emergency = 'ЧС',
   veterans = 'Пенсионеры',
-  invalid = 'Люди с ОВС',
-  сhildren = 'Дети и подростки',
-  animal = 'Животные',
+  people = 'Люди с ОВС',
+  children = 'Дети и подростки',
+  animals = 'Животные',
   nature = 'Природа',
   science = 'Наука',
   education = 'Образование',
-  other = 'Другое',
+  else = 'Другое',
 }
 export enum Format {
   online = 'Онлайн',

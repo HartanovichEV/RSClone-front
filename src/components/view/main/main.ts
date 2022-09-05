@@ -1,5 +1,8 @@
-import { userThanks } from '../../model/fakeDatabase/userThanks';
 import back from '../../assets/img/back.png';
+import { getParticipantsInThanks } from '../../controller/dataHandlers/userFilters';
+import { Thanks } from '../../model/type/type';
+import { allUsers } from '../../model/api/users';
+import { allThanks } from '../../model/api/thanks';
 
 export default class Main {
   wrapper: HTMLElement;
@@ -27,7 +30,7 @@ export default class Main {
     <section class="requests-section main-request-section" id="requests">
       <div class="container">
         <div class="slider">
-          <button class="btn slider__btn prev">←</button>
+          <button class="btn slider__btn slider-prev prev">←</button>
           <div class="slider__wrapper">
             <div class="slider__items">
               <div class="slider__item-left"></div>
@@ -35,7 +38,7 @@ export default class Main {
               <div class="slider__item-right"></div>
             </div>
           </div> 
-          <button class="btn slider__btn next">→</button>
+          <button class="btn slider__btn slider-next next">→</button>
         </div>
         <p>... успей им помочь</p>
         <div class="slider__frame3"></div>
@@ -43,35 +46,50 @@ export default class Main {
     <section>`;
   }
 
-  renderThanksCard(name: string, avatar: string, body: string, target: string, targetAvatar: string): string {
+  renderThanksCard(item: Thanks): string {
+    const participants = getParticipantsInThanks(allUsers, item);
+    const user = allUsers.find(u => u.id === item.userId);
+
     return `
     <div class="card thanks-card">
       <div class="card__header thanks-card__header">              
         <div class="card__avatar thanks-card-to__avatar">
-          <img src=${targetAvatar} alt="Avatar">
+          ${participants.forEach(p => `<img src=${p.avatar} alt="Avatar">`)}
         </div>
-        <p><span class="card__name thanks-card-to__name">${target}, </span>спасибо за</p>
+        <p><span class="card__name thanks-card-to__name"></span>спасибо за</p>
       </div>
-      <div class="card__title thanks-card__title">${body}</div>
+      <div class="card__title thanks-card__title">${item.description}</div>
       <div class="card__footer thanks-card__footer">
-        <div class="thanks-card-from__name">${name}</div>
+        <div class="thanks-card-from__name">${user?.name}</div>
         <div class="thanks-card-from__avatar">
-          <img src=${avatar} alt="Avatar">
+          <img src=${user?.avatar} alt="Avatar">
         </div>
       </div>        
     </div>`;
   }
 
-  getThanksSection(): string {
+  getThanksSection(arr: Thanks[]): string {
     return `
     <section class="thanks-section" id="thanks">
       <h2 class="thanks-section__title">Копилка добрых дел </h2>
       <button class="btn thanks-section__btn">Лучшие вoлoнтеры</button>
       <div class="thanks-section__cards">
-        ${userThanks.map(item =>
-    this.renderThanksCard(item.name, item.avatar, item.body, item.target, item.targetAvatar)).join('')}      
+        ${arr.map(item =>
+    this.renderThanksCard(item)).join('')}      
       </div>        
       <div class="thanks-section__frame4"></div>        
+      </section>
+    `;
+  }
+
+  getUserThanksSection(arr: Thanks[]): string {
+    return `
+    <section class="thanks-section" id="thanks">
+      <h2 class="thanks-section__title">Копилка добрых дел </h2>
+      <div class="thanks-section__cards">
+        ${arr.map(item =>
+    this.renderThanksCard(item)).join('')}      
+      </div>        
       </section>
     `;
   }
@@ -117,9 +135,6 @@ export default class Main {
   getUserWrapper(): string {
     return `
       <div class="user-section-main__wrapper">        
-        <div class="side-menu">
-          <span class="side-menu__span">Меню</span>
-        </div>
         ${this.getUserMenuSection()}
         ${this.getUsersMain()}        
       </div>
@@ -129,12 +144,12 @@ export default class Main {
   getUserFiltersSection(): string {
     return ` 
     <section class="filters-section">
+      <a href="user.html">
+        <button class="btn filters-section__btn-back color-btn">
+          <img src=${back} alt="back">
+        </button>
+      </a> 
         <div class="filters-section__filters">
-        <a href="user.html">
-          <button class="btn filters-section__btn-back color-btn">
-            <img src=${back} alt="back">
-          </button>
-        </a> 
           <div class="filters-section__format">
             <h5 class="filters-section__title format__title">Выбрать формат</h5>
             <div class="filters-section__body">
@@ -247,7 +262,7 @@ export default class Main {
       case ('main'): {
         this.wrapper.innerHTML += this.getWelcomeSection();
         this.wrapper.innerHTML += this.getRequestSection();
-        this.wrapper.innerHTML += this.getThanksSection();
+        this.wrapper.innerHTML += this.getThanksSection(allThanks);
         this.wrapper.innerHTML += this.getInfoSection();
         break;
       }

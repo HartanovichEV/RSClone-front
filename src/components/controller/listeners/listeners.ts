@@ -9,13 +9,16 @@ import Main from '../../view/main/main';
 import getFilter from '../../utils/filters';
 import Modal from '../../view/modal/modal';
 import { rating } from '../../model/fakeDatabase/rating';
-import { Rating } from '../../model/type/type';
-import { showFiltersMenu, hideFiltersMenu, innerTextClosed } from '../../utils/filtersMenuToggle';
+import { Rating, Thanks } from '../../model/type/type';
+import { showFiltersMenu, innerTextClosed, hideFiltersMenu } from '../../utils/filtersMenuToggle';
 import { closeApply, createApply } from '../../model/api/applies';
 import getPageMyRequests from '../../utils/renderMyRequestCard';
 import getPageMyParticipates from '../../utils/renderMyParticipateCard';
 import { allApplies, getMyCreatedApplies, getOpenApplies, 
   getNotMyApplies, getMyParticipateApplies } from '../dataHandlers/applyFilters';
+import {  getParticipantsInThanks } from '../dataHandlers/userFilters';
+import { allUsers } from '../../model/api/users';
+import { getThank, allThanks } from '../../model/api/thanks';
 
 const openApplies =  getOpenApplies(allApplies);
 const myApplies =  getMyCreatedApplies(openApplies);
@@ -117,6 +120,7 @@ export function showLogin(event: Event): void {
 
 function showCloseRequest(): void {
   const applyId = (event?.target as HTMLElement).getAttribute('applyId');
+  const modal: Modal = new Modal();
   if (applyId)
     localStorage.setItem('applyId', applyId);
   const requestModal = document.querySelector('.modal-close-request') as HTMLElement;
@@ -131,7 +135,19 @@ function showCloseRequest(): void {
     hideModal();
 
   });
-  function showCloseRequestBtns() {
+  async function showCloseRequestBtns() {
+    hideModal();
+    const participantsBlock = document.querySelector('.close-request__checkboxes') as HTMLElement;
+    let applyInfo: Thanks[];
+    if (applyId) {
+      applyInfo =  await getThank(+applyId);
+      const participants = getParticipantsInThanks(allUsers, applyInfo[0]);
+      if (participants.length === 0) {
+        closeApply(+applyId, 'Мы рады что вам помогли, хоть и не с нашего сайта');
+        return setTimeout(() => location.reload(), 4000);
+        
+      } 
+    }
     const requestModalHelp = document.querySelector('.close-request') as HTMLElement;
     document.body.classList.add('modal--open');
     requestModalHelp.classList.remove('modal--hidden');
@@ -241,9 +257,10 @@ export function authSubmitListener() {
 
 export function createRequestListener(): void {
   const requestForm = document.getElementById('requestForm') as HTMLFormElement;
-  requestForm.addEventListener('submit', (event) => {
+  requestForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const result = createApply(getRequestFormData());
+    const result = await createApply(getRequestFormData());
+    if (!result) hideModal();
     return result;
   });
 }
@@ -360,6 +377,19 @@ export function openUserProfile(): void {
   };
 } 
 
+function myThanksPage(): void {
+  const usersMainSection = document.querySelector('.users-main-section') as HTMLElement;
+  const newMain: Main = new Main();
+  usersMainSection.innerHTML = '';
+  usersMainSection.innerHTML += newMain.getUserThanksSection(allThanks);
+}
+
+export function renderMyThanks(): void {
+  const myThanksBtn = document.querySelector('.my-thanks-btn') as HTMLButtonElement;
+
+  myThanksBtn.addEventListener('click', myThanksPage);
+}
+
 export function addListeners(): void {
   openRegisterWindowListener();
   openLoginWindowListener();
@@ -374,14 +404,13 @@ export function addListeners(): void {
 
 export function addUserListeners(): void {
   renderUserPageRequests();
-  // openUserRequestListener();
   closeModalWindowListener();
   globalCloseModal();
   renderMyRequests();
-  //openUserCloseRequestListener();
   logoutListener();
   createRequestListener();
   openUserProfile();
   renderMyRequests();
   renderMyParticipates();
+  renderMyThanks();
 }

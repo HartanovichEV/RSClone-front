@@ -1,9 +1,14 @@
 import vladimirAva from '../../assets/img/Владимир.png'; 
 import elenaAva from '../../assets/img/Елена.png'; 
 import svetlanaAva from '../../assets/img/Светлана.png'; 
-import magicMan from '../../assets/img/magic-man.png';
-// import { rating } from '../../model/fakeDatabase/rating';
 import { Rating } from '../../model/type/type';
+import { allUsers } from '../../model/api/users';
+import { UserVisualData } from '../../model/type/User';
+import { getUsersRating } from '../../controller/dataHandlers/userFilters';
+import { getAuthUserData } from '../../model/api/users';
+
+
+const sortedUsers = getUsersRating(allUsers);
 
 export default class Modal {
   wrapper: HTMLDivElement;
@@ -32,7 +37,7 @@ export default class Modal {
                   <label for="register__avatar" class="modal__input file-style">Загрузите аватар</label>
                   <input type="file" class = "modal__input" id="register__avatar" name = "avatar">
                   <div class="modal-register__btns">
-                    <button class="btn modal__btn register__btn color-btn" type="submit">Зарегистрироваться</button>
+                    <button class="btn modal__btn register__btn color-btn" type="submit">Регистрация</button>
                     <button class="btn modal__btn register__btn-to-login">Войти</button>
                   </div>
                 </form>
@@ -54,7 +59,7 @@ export default class Modal {
                     placeholder="Введите ваш Пароль">
                   <div class="modal__btns">
                     <button class="btn modal__btn login__btn color-btn" type="submit">Войти</button>
-                    <button class="btn modal__btn login__btn-to-register">Зарегистрироваться</button>
+                    <button class="btn modal__btn login__btn-to-register">Регистрация</button>
                   </div>
                 </form>
               </div>
@@ -222,7 +227,7 @@ export default class Modal {
     `;
   }
 
-  getRating(arr: Rating): string {
+  getRating(arr: UserVisualData[]): string {
     return `
     <div class="modal modal-rating modal--hidden">  
       <div class="modal__content modal-rating__content">
@@ -235,7 +240,7 @@ export default class Modal {
           <h6 class="modal-rating__score-subtitle">Дела</h6>
         </div>
         <div class="modal-rating__body">
-          ${arr.map(item => this.renderRatingTable(item.ava, item.name, item.score)).join('')}
+          ${arr.map(item => this.renderRatingTable(item.avatar, item.name, item.goodThings)).join('')}
         </div>
       </div>
     </div>
@@ -261,6 +266,9 @@ export default class Modal {
   }
 
   getUserProfile(): string {
+    const user = getAuthUserData();
+    if (!user) return '';
+
     return `
     <div class="modal profile modal--hidden">
     <div class="modal__content profile__wrapper">
@@ -272,31 +280,25 @@ export default class Modal {
         <div class="user">
           <h6 class="user__title">Пользователь сайта</h6>
           <div class="user__img">
-            <img class="user__ava" src="${magicMan}" alt="Avatar">
+            <img class="user__ava" src="${user.avatar}" alt="Avatar">
+            <label for="change__avatar" class="modal__input file-style user__ava-choose">Загрузите аватар</label>       
           </div>
-          <h4 class="user__name">Волшебный Чел</h4>
-          <p class="user__location">Земли Ууу</p>
-          <p class="user__text">...О мелких людишках я быстро забываю</p>
+          <h4 class="user__name">${user.name}</h4>
         </div>
         <div class="user-info">
           <h6 class="user-info__title">История профиля</h6>
           <div class="user-info__content">
             <div class="user-info__subtitles">
-              <p class="user-info__subtitle">Зарегистрирован:</p>
-              <p class="user-info__subtitle">Страна:</p>
-              <p class="user-info__subtitle">Город:</p>
-              <p class="user-info__subtitle">Пол:</p>
-              <p class="user-info__subtitle">Возраст:</p>
+              <p class="user-info__subtitle">Логин:</p>
+              <p class="user-info__subtitle">Почта:</p>
               <p class="user-info__subtitle">Рейтинг:</p>
             </div>
             <form class="user-info__form">
               <div class="user-info__inputs">
-                <input type="text" class="user-info__input content__registered" placeholder="04-09-2022" disabled>
-                <input type="text" class="user-info__input content__country" placeholder="Земли Ууу">
-                <input type="text" class="user-info__input content__city" placeholder="Город Чудаков">
-                <input type="text" class="user-info__input content__sex" placeholder="Мужской">
-                <input type="text" class="user-info__input content__age" placeholder="200+">
-                <input type="text" class="user-info__input content__rating" placeholder="-999999999" disabled>
+                <input type="text" class="user-info__input content__sex" placeholder="${user.login}">
+                <input type="text" class="user-info__input content__age" placeholder="${user.email}">
+                <input type="text" class="user-info__input content__rating" placeholder="${user.goodThings}" disabled>
+                <input type="file" class="modal__input" id="change__avatar" name="avatar">
                 <input type="submit" class="user-info__submit-input" id="changeProfile">
               </div>
             </form>
@@ -308,14 +310,14 @@ export default class Modal {
   </div>`;
   }
 
-  render(arr: Rating): HTMLDivElement {
+  render(): HTMLDivElement {
     this.wrapper.innerHTML += this.getRegister();
     this.wrapper.innerHTML += this.getLogin();
     this.wrapper.innerHTML += this.getRequest();
+    this.wrapper.innerHTML += this.getCloseRequestWithHelp();
     this.wrapper.innerHTML += this.getCloseRequest();
     this.wrapper.innerHTML += this.getMessageEmail();
-    this.wrapper.innerHTML += this.getCloseRequestWithHelp();
-    this.wrapper.innerHTML += this.getRating(arr);
+    this.wrapper.innerHTML += this.getRating(sortedUsers);
     this.wrapper.innerHTML += this.getUserProfile();
     this.wrapper.classList.add('modal-wrapper');
     return this.wrapper;

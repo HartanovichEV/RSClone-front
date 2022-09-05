@@ -18,3 +18,5 @@ export async function  getUsers() {
     return [];   
   }
 }
+
+export const allUsers = await getUsers();

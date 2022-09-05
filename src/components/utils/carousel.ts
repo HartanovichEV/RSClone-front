@@ -1,8 +1,7 @@
-import { dataUserApply } from '../model/fakeDatabase/userApply';
 import createDivItemCard from './renderRequestCard';
 import { showLogin } from '../controller/listeners/listeners';
 import { pageState } from '../model/pageState';
-
+import { allApplies } from '../controller/dataHandlers/applyFilters';
 const mainPage: string = pageState[0];
 
 export default function carousel() {
@@ -25,11 +24,11 @@ export default function carousel() {
   
   function createCards(index: number) {    
     for (index; index < cardsOnPage; index++) {
-      const divLeft = createDivItemCard(dataUserApply[index], mainPage);
+      const divLeft = createDivItemCard(allApplies[index], mainPage);
       if (divLeft) ITEM_LEFT.appendChild(divLeft); 
-      const divActiv = createDivItemCard(dataUserApply[index + cardsOnPage], mainPage);
+      const divActiv = createDivItemCard(allApplies[index + cardsOnPage], mainPage);
       if (divActiv) ITEM_ACTIVE.appendChild(divActiv);
-      const divRight = createDivItemCard(dataUserApply[index + (cardsOnPage * 2)], mainPage);
+      const divRight = createDivItemCard(allApplies[index + (cardsOnPage * 2)], mainPage);
       if (divRight) ITEM_RIGHT.appendChild(divRight);       
     } 
     const helpBtns: NodeListOf<Element> = document.querySelectorAll('.card__login-btn');
@@ -60,8 +59,8 @@ export default function carousel() {
       ITEM_ACTIVE.innerHTML = ITEM_LEFT.innerHTML;
       ITEM_LEFT.innerHTML = '';
       while (cardsWhile) {
-        if (currentIndex === 0) currentIndex = dataUserApply.length - 1;
-        const div = createDivItemCard(dataUserApply[currentIndex], mainPage);
+        if (currentIndex === 0) currentIndex = allApplies.length - 1;
+        const div = createDivItemCard(allApplies[currentIndex], mainPage);
         if (div) ITEM_LEFT.appendChild(div);
         currentIndex--;
         cardsWhile--;
@@ -75,8 +74,8 @@ export default function carousel() {
       ITEM_ACTIVE.innerHTML = ITEM_RIGHT.innerHTML;     
       ITEM_RIGHT.innerHTML = '';     
       while (cardsWhile) {   
-        if (currentIndex === dataUserApply.length) currentIndex = 0;     
-        const div = createDivItemCard(dataUserApply[currentIndex], mainPage);
+        if (currentIndex === allApplies.length) currentIndex = 0;     
+        const div = createDivItemCard(allApplies[currentIndex], mainPage);
         if (div) ITEM_RIGHT.appendChild(div);
         currentIndex++;
         cardsWhile--;

@@ -1,3 +1,4 @@
+import { showMessage } from '../../utils/showMessage';
 import { UserAuth } from '../type/User';
 
 const SERVER = process.env.SERVER as string;
@@ -13,10 +14,11 @@ export async function authorizeRequest(user: UserAuth) {
     });
     const result = await response.json();
     const token = result.accessToken;
-    const userId = result.accessToken;
-    localStorage.setItem('token', token );
-    localStorage.setItem('userId', userId );
-    window.location.href = 'http://localhost:8080/user.html';
+    if (response.status === 200) {
+      localStorage.setItem('token', token );
+      showMessage('Вы успешно авторизованы');
+      setTimeout( () => window.location.href = document.location.origin + '/user', 2500);
+    } else return (showMessage('Ошибка авторизации', true));
   } catch (err) {
     if (err instanceof Error)
       return console.log(err.message);

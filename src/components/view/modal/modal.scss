@@ -36,6 +36,10 @@
     text-align: center;
     gap: 5rem;
     width: 100%;
+
+    @media (max-width: 768px) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__title {
@@ -55,7 +59,7 @@
   }
 
   &__input {
-    width: 20rem;
+    max-width: 20rem;
     height: 2rem;
     padding: 1rem;
     border: 3px solid #793CFB;
@@ -317,11 +321,9 @@
 
 .request-location {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.5rem;
   margin-bottom: 1rem;
-
-
 }
 
 .request-textarea {
@@ -368,6 +370,17 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+
+
+    &-ava{
+      width:63px;
+      height: 63px;
+
+      & img{
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
   }
 
   &__main:last-child {
@@ -460,14 +473,21 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0 5rem;
+    background-color: #FFFFF0;
+    max-width: 44rem;
   }
 
   &__content {
     display: flex;
     gap: 5rem;
 
+    @media (max-width: 1200px) {
+      gap: 2rem;
+    }
+
     @media (max-width: 768px) {
       gap: 1rem;
+      flex-direction: column;
     }
   }
 }
@@ -475,27 +495,48 @@
 .user {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   max-width: 15rem;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  word-break: break-word;
+  min-width: 15rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  
+  @media (max-width: 768px) {
+    word-break: break-word;
+    gap: 0.5rem;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
 
   &__title {
     font-size: 1.2rem;
     font-weight: 600;
     padding: 0.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    text-align: center;
   }
 
   &__img {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
   }
 
   &__ava {
+    max-width: 63px;
+    max-height: 63px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__ava-choose {
     max-width: 8rem;
-    max-height: 8rem;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+      max-width: 9rem;
+    }
   }
 
   &__name {
@@ -522,6 +563,10 @@
   gap: 2rem;
   max-width: 40rem;
 
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+
   &__content {
     display: flex;
     gap: 2rem;
@@ -539,7 +584,7 @@
     font-size: 1rem;
 
     @media (max-width: 414px) {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
     }
   }
 
@@ -554,9 +599,10 @@
   &__input {
     width: 100%;
     border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     line-height: 2rem;
     font-size: 1rem;
+    background-color: #FFFFF0;
   }
 
   &__submit-input {
@@ -566,5 +612,9 @@
   &__submit-btn {
     max-width: 3rem;
     text-align: center;
+
+    @media (max-width: 768px) {
+      margin: 0 auto;
+    }
   }
 }
