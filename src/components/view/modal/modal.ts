@@ -5,6 +5,7 @@ import { allUsers } from '../../model/api/users';
 import { UserVisualData } from '../../model/type/User';
 import { getUsersRating } from '../../controller/dataHandlers/userFilters';
 import { getAuthUserData } from '../../model/api/users';
+import { Category, Format, Country } from '../../model/type/type';
 
 
 const sortedUsers = getUsersRating(allUsers);
@@ -135,6 +136,111 @@ export default class Modal {
           Поля, отмеченные <span class="modal__footer-span">*</span>, обязательны для заполнения.
         </p>
       </div>
+      </div>
+    </div>`;   
+  }
+  
+  getStepRequest(): string {
+    return `
+    <div class="modal modal-request modal--hidden">
+      <div class="modal__content modal-request__content">
+        <div class="modal__header modal-request__header">
+          <span class="modal__close modal-request__close"></span>
+          <div style="text-align:center; margin:20px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+          </div>
+          <span class="modal__close modal-request__close">&times;</span>
+
+        </div>
+        <form id="regForm" action="" class="modal__form modal-register__form">        
+        <h1>Создание заявки на волонтерскую помощь</h1>
+        <div class="tab">Выберите категорию и формат проведения:
+        <div class="__select" data-state="">
+          <div class="__select__title"></div>
+          <div class="__select__content">
+            <input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" value="healthcare"/>
+            <label for="singleSelect0" tabindex="0" class="__select__label" data-value="${Category.healthcare}"></label>
+            <input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" value="emergency"/>
+            <label for="singleSelect1" tabindex="0" class="__select__label" data-value="${Category.emergency}"></label>
+            <input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" value="veterans"/>
+            <label for="singleSelect2" tabindex="0" class="__select__label" data-value="${Category.veterans}"></label>
+            <input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" value="people"/>
+            <label for="singleSelect3" tabindex="0" class="__select__label" data-value="${Category.people}"></label>
+            <input id="singleSelect4" class="__select__input" type="radio" name="singleSelect" value="children"/>
+            <label for="singleSelect4" tabindex="0" class="__select__label" data-value="${Category.children}"></label>
+            <input id="singleSelect5" class="__select__input" type="radio" name="singleSelect" value="animals"/>
+            <label for="singleSelect5" tabindex="0" class="__select__label" data-value="${Category.animals}"></label>
+            <input id="singleSelect6" class="__select__input" type="radio" name="singleSelect" value="nature"/>
+            <label for="singleSelect6" tabindex="0" class="__select__label" data-value="${Category.nature}"></label>
+            <input id="singleSelect7" class="__select__input" type="radio" name="singleSelect" value="science" />
+            <label for="singleSelect7" tabindex="0" class="__select__label" data-value="${Category.science}"></label>
+            <input id="singleSelect8" class="__select__input" type="radio" name="singleSelect" value="education" />
+            <label for="singleSelect8" tabindex="0" class="__select__label" data-value="${Category.education}"></label>
+            <input id="singleSelect9" class="__select__input" type="radio" name="singleSelect" value="else"/>
+            <label for="singleSelect9" tabindex="0" class="__select__label" data-value="${Category.else}"></label>
+          </div>
+        </div>
+
+        <div class="request-radio">
+            <h4 class="request-radio__title">Формат проведения:</h4>
+            <div class="request-radio__inputs">   
+              <label class="request-radio__inputs-label" for="online">
+                <input class="request-radio__inputs-input" type="radio" name="format" id="online" value="online">
+                <span class="request-radio__inputs-custom"></span>
+                <span class="request-radio__inputs-span">${Format.online}</span>
+              </label>        
+              <label class="request-radio__inputs-label" for="offline">
+                <input class="request-radio__inputs-input" type="radio" name="format" id="offline" value="offline">
+                <span class="request-radio__inputs-custom"></span>
+                <span class="request-radio__inputs-span">${Format.offline}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab">Локация и дата оказания помощи:
+          <div class="request-location">
+          <div class="request-radio__inputs">
+            <label class="request-radio__inputs-label" for="belarus">
+              <input class="request-radio__inputs-input" type="radio" 
+              name="сountry" id="belarus" value="${Country.belarus}">
+              <span class="request-radio__inputs-custom"></span>
+              <span class="request-radio__inputs-span">${Country.belarus}</span>
+            </label>        
+            <label class="request-radio__inputs-label" for="russia">
+              <input class="request-radio__inputs-input" type="radio" 
+              name="сountry" id="russia" value="${Country.russia}">
+              <span class="request-radio__inputs-custom"></span>
+              <span class="request-radio__inputs-span">${Country.russia}</span>
+            </label>
+            <label class="request-radio__inputs-label" for="ukraine">
+              <input class="request-radio__inputs-input" type="radio" 
+              name="сountry" id="ukraine" value="${Country.ukraine}">
+              <span class="request-radio__inputs-custom"></span>
+              <span class="request-radio__inputs-span">${Country.ukraine}</span>
+            </label>
+            </div>
+            <input class="request-location__select-input select-input" name="address"
+              type="text" placeholder="Адрес" autocomplete="off" id="address">
+            <input class="request-location__select-input select-input select-input_date-time" name="date"
+              type="date" placeholder="Дата" autocomplete="off" id="time">
+            <input class="request-location__select-input select-input select-input_date-time" name="time"
+              type="time" placeholder="Время" autocomplete="off" id="date">
+          </div>          
+        </div>
+        
+        <div class="tab">Опишите суть проблемы и необходимую помощь:
+          <div class="request-textarea">            
+            <textarea name="textarea" cols="80" rows="10" class="request-textarea__textarea" id="textarea"></textarea>
+          </div>
+        </div>      
+          <div class="nextprev__btns">
+            <button class="btn" type="button" id="prevBtn">Назад</button>
+            <button class="btn color-btn" type="button" id="nextBtn">Следующий</button>
+          </div>
+        </form>
       </div>
     </div>`;   
   }
@@ -311,7 +417,7 @@ export default class Modal {
   render(): HTMLDivElement {
     this.wrapper.innerHTML += this.getRegister();
     this.wrapper.innerHTML += this.getLogin();
-    this.wrapper.innerHTML += this.getRequest();
+    this.wrapper.innerHTML += this.getStepRequest();
     this.wrapper.innerHTML += this.getCloseRequestWithHelp();
     this.wrapper.innerHTML += this.getCloseRequest();
     this.wrapper.innerHTML += this.getMessageEmail('');

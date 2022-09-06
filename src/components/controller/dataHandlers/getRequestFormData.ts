@@ -1,7 +1,7 @@
 import { Apply, Category, Country, Format } from '../../model/type/type';
 
 export default function getRequestFormData(): Apply {
-  const requestForm = document.getElementById('requestForm') as HTMLFormElement;
+  const requestForm = document.getElementById('regForm') as HTMLFormElement;
   const data = new FormData(requestForm);
   const category = data.get('category') as keyof typeof Category;
   const format = data.get('format') as keyof typeof Format;

@@ -20,6 +20,7 @@ import { allUsers } from '../../model/api/users';
 import { allThanks, createThanks } from '../../model/api/thanks';
 import { showMessage } from '../../utils/showMessage';
 import { getAllThanksWithDescription } from '../dataHandlers/thanksFilters';
+import { nextPrev, showTab } from '../../utils/form';
 
 const openApplies =  getOpenApplies(allApplies);
 const myApplies =  getMyCreatedApplies(openApplies);
@@ -237,6 +238,7 @@ export function radioBtnListener(): void {
 export function registerSubmitListener() {
   const form = document.querySelector('.modal-register__form') as HTMLFormElement;
   form.addEventListener('submit', (event: Event) => {
+    console.log('sub');
     event.preventDefault();
     const elements = form.elements as RegisterElements;
     const user: User = {
@@ -287,13 +289,29 @@ export function giveThanksListener() {
 }
 
 export function createRequestListener(): void {
-  const requestForm = document.getElementById('requestForm') as HTMLFormElement;
+  const requestForm = document.getElementById('regForm') as HTMLFormElement;
   requestForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const result = await createApply(getRequestFormData());
     if (!result) hideModal();
     return result;
   });
+}
+export function renderUserRequest(): void {
+  const requestsBtn = document.querySelector('.buttons-section__btn-requests') as HTMLButtonElement;
+  requestsBtn.addEventListener('click', userPageRequests);
+  console.log('show');
+  showTab(0);
+  const prevBtn = document.getElementById('prevBtn') as HTMLElement;
+  const nextBtn = document.getElementById('nextBtn') as HTMLElement;
+  prevBtn.addEventListener('click', function () { nextPrev(-1); });
+  nextBtn.addEventListener('click', function () { nextPrev(1); });
+}
+
+export function openUserRequestListener(): void {
+  const openRequestBtn = document.querySelector('.buttons-section__btn-apply') as HTMLButtonElement;
+
+  openRequestBtn.addEventListener('click', showRequest);
 }
 export function renderUserPageRequests(): void {
   const requestsBtn = document.querySelector('.buttons-section__btn-requests') as HTMLButtonElement;
@@ -477,4 +495,5 @@ export function addUserListeners(): void {
   giveThanksListener();
   //sortRating();
   renderUserRating();
+  renderUserRequest();
 }
