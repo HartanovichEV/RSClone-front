@@ -662,7 +662,7 @@ body {
   -webkit-box-orient: vertical;
 }
 .card__info {
-  height: 80px;
+  height: 130px;
 }
 .card__span {
   font-weight: 600;
@@ -1976,6 +1976,15 @@ body {
   height: 63px;
   border-radius: 50%;
   object-fit: cover;
+}
+.avatar__participants {
+  position: relative;
+}
+.avatar__participants > .avatar_participant:first-of-type {
+  margin-left: 20px;
+}
+.avatar__participants .username {
+  margin-top: 45px;
 }
 .avatar_participant {
   margin-left: -40px;

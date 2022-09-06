@@ -4000,6 +4000,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getMyCreatedApplies": () => (/* binding */ getMyCreatedApplies),
 /* harmony export */   "getMyParticipateApplies": () => (/* binding */ getMyParticipateApplies),
 /* harmony export */   "getNotMyApplies": () => (/* binding */ getNotMyApplies),
+/* harmony export */   "getNotMyParticipateApplies": () => (/* binding */ getNotMyParticipateApplies),
 /* harmony export */   "getOpenApplies": () => (/* binding */ getOpenApplies)
 /* harmony export */ });
 /* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
@@ -4026,6 +4027,12 @@ const getMyParticipateApplies = (applies) => {
     if (!user)
         return [];
     return applies.filter(apply => apply.participants.some(p => p === user.id));
+};
+const getNotMyParticipateApplies = (applies) => {
+    const user = (0,_model_api_users__WEBPACK_IMPORTED_MODULE_0__.getAuthUserData)();
+    if (!user)
+        return [];
+    return applies.filter(apply => !apply.participants.some(p => p === user.id));
 };
 const allApplies = await (0,_createAppliesWithUser__WEBPACK_IMPORTED_MODULE_1__.allAppliesWithUsers)();
 
@@ -4203,8 +4210,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_showMessage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../utils/showMessage */ "./src/components/utils/showMessage.ts");
 /* harmony import */ var _dataHandlers_thanksFilters__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../dataHandlers/thanksFilters */ "./src/components/controller/dataHandlers/thanksFilters.ts");
 /* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_view_main_main__WEBPACK_IMPORTED_MODULE_4__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__, _model_api_users__WEBPACK_IMPORTED_MODULE_13__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_14__]);
-([_view_main_main__WEBPACK_IMPORTED_MODULE_4__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__, _model_api_users__WEBPACK_IMPORTED_MODULE_13__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_14__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_view_main_main__WEBPACK_IMPORTED_MODULE_4__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__, _utils_renderMyRequestCard__WEBPACK_IMPORTED_MODULE_9__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__, _model_api_users__WEBPACK_IMPORTED_MODULE_13__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_14__]);
+([_view_main_main__WEBPACK_IMPORTED_MODULE_4__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__, _utils_renderMyRequestCard__WEBPACK_IMPORTED_MODULE_9__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__, _model_api_users__WEBPACK_IMPORTED_MODULE_13__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_14__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -4226,6 +4233,7 @@ const openApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.
 const myApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.getMyCreatedApplies)(openApplies);
 const myParticipates = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.getMyParticipateApplies)(openApplies);
 const NotMyApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.getNotMyApplies)(openApplies);
+const appliesForPagination = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.getNotMyParticipateApplies)(NotMyApplies);
 const sortedUsers = (0,_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_12__.getUsersRating)(_model_api_users__WEBPACK_IMPORTED_MODULE_13__.allUsers);
 function hideModal() {
     const registerModal = document.querySelectorAll('.modal');
@@ -4265,7 +4273,7 @@ function userPageRequests() {
     main.innerHTML = '';
     main.innerHTML += newMain.getWrapper();
     main.innerHTML += newMain.getUserPaginationBtnsSection();
-    (0,_utils_pagination__WEBPACK_IMPORTED_MODULE_3__.pagination)(NotMyApplies);
+    (0,_utils_pagination__WEBPACK_IMPORTED_MODULE_3__.pagination)(appliesForPagination);
     const filtersBtns = document.querySelectorAll('.filters-section__btn');
     [...filtersBtns].map(item => item.addEventListener('click', _utils_filters__WEBPACK_IMPORTED_MODULE_5__["default"]));
     sideMenuListener();
@@ -4480,6 +4488,19 @@ function myPageRequests() {
     usersMainSection.innerHTML = '';
     usersMainSection.innerHTML += newMain.getMyRequests();
     (0,_utils_renderMyRequestCard__WEBPACK_IMPORTED_MODULE_9__["default"])(myApplies);
+    const avatars = usersMainSection.querySelectorAll('.avatar_participant');
+    [...avatars].map((avatar) => avatar.addEventListener('click', (event) => {
+        const img = event.target;
+        const userId = img.getAttribute('userId');
+        if (!userId)
+            return;
+        const currentUser = _model_api_users__WEBPACK_IMPORTED_MODULE_13__.allUsers.find(user => user.id === +userId);
+        console.log(currentUser);
+        const email = document.querySelector('.modal__user-info');
+        console.log(email);
+        email.innerHTML = `Почта пользователя : ${currentUser === null || currentUser === void 0 ? void 0 : currentUser.email}`;
+        showMessageEmail();
+    }));
     openUserCloseRequestListener();
     const wrapper = document.querySelector('.user-section-main__wrapper');
     wrapper.classList.add('my-requests-section-wrapper');
@@ -5589,7 +5610,9 @@ function createDivMyParticipateCard(data) {
         </ul>
       </div>
       <div class="card__btn">
-        <button class="btn color-btn my-requests__close" participateId = "${data.id}">Отклонить мое предложение</button>
+        <button class="btn color-btn my-participate__close" participateId = "${data.id}">
+          Отклонить мое предложение
+        </button>
       </div>                
       `;
     return div;
@@ -5612,17 +5635,25 @@ function getPageMyParticipates(myApplies) {
 /*!*****************************************************!*\
   !*** ./src/components/utils/renderMyRequestCard.ts ***!
   \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getPageMyRequests)
 /* harmony export */ });
-/* harmony import */ var _model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model/type/dateFormatter */ "./src/components/model/type/dateFormatter.ts");
+/* harmony import */ var _controller_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/dataHandlers/userFilters */ "./src/components/controller/dataHandlers/userFilters.ts");
+/* harmony import */ var _model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/type/dateFormatter */ "./src/components/model/type/dateFormatter.ts");
+/* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/api/users */ "./src/components/model/api/users.ts");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_model_api_users__WEBPACK_IMPORTED_MODULE_2__]);
+_model_api_users__WEBPACK_IMPORTED_MODULE_2__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+
+
 
 function createDivMyRequestCard(data) {
     const div = document.createElement('div');
+    const participants = (0,_controller_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_0__.getParticipantsInApply)(_model_api_users__WEBPACK_IMPORTED_MODULE_2__.allUsers, data);
     div.className = 'card';
     div.setAttribute('applyId', '' + data.id);
     div.innerHTML = `                  
@@ -5635,14 +5666,19 @@ function createDivMyRequestCard(data) {
             <li><span class="card__span">Страна:</span> ${data.country}</li>
             ${(data.location) ? '<li><span class="card__span">Адрес:</span>' + data.location + '</li>' : ''}
             ${(data.date) ? '<li><span class="card__span">Дата:</span>'
-        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__.dateFormatter)(new Date(data.date)) + '</li>' +
+        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_1__.dateFormatter)(new Date(data.date)) + '</li>' +
         '<li><span class="card__span">Время:</span>'
-        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__.timeFormatter)(new Date(data.date)) + '</li>' : ''}
+        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_1__.timeFormatter)(new Date(data.date)) + '</li>' : ''}
           </ul>
         </div>
         <div class="card__btn">
+        
           <button class="btn color-btn my-requests__close" applyId = "${data.id}">Закрыть заявку</button>
-        </div>                
+        </div>    
+        <div class="card__avatar avatar__participants">
+          ${participants.reduce((sum, p) => sum += `<img src=${p.avatar} alt="Avatar" 
+          class="avatar avatar_participant" userId='${p.id}'><span class='username'>${p.name}</span>`, '')}
+        </div>            
       `;
     return div;
 }
@@ -5657,6 +5693,8 @@ function getPageMyRequests(myApplies) {
     }
 }
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -6153,7 +6191,7 @@ class Main {
         <div class="user-rating__name-body">
           <div>${num}</div>
           <div class="user-rating__main-ava">
-            <img src="${ava}" alt="Avatar">
+            <img class="avatar" src="${ava}" alt="Avatar">
           </div>
           <span class="user-rating__name-name">${name}</span>
         </div>
@@ -6420,7 +6458,7 @@ class Modal {
       </div>
     </div>`;
     }
-    getMessageEmail() {
+    getMessageEmail(email) {
         return `<div class="modal modal-message-email modal--hidden">
               <div class="modal__content modal-login__content">
                 <div class="modal__header modal-login__header message-email">                  
@@ -6428,8 +6466,7 @@ class Modal {
                   <span class="modal__close modal-login__close">&times;</span> 
                 </div>
               <div class="modal__header modal-login__header" style="color: #793CFB;">                
-                <span class="modal__title">Письмо с предложением <br> 
-                помощи отправлено!</span>
+                <span class="modal__title modal__user-info">Почта пользователя : ${email}</span>
               </div>                                  
               </div>
             </div>`;
@@ -6535,7 +6572,7 @@ class Modal {
         this.wrapper.innerHTML += this.getRequest();
         this.wrapper.innerHTML += this.getCloseRequestWithHelp();
         this.wrapper.innerHTML += this.getCloseRequest();
-        this.wrapper.innerHTML += this.getMessageEmail();
+        this.wrapper.innerHTML += this.getMessageEmail('');
         this.wrapper.innerHTML += this.getRating(sortedUsers);
         this.wrapper.innerHTML += this.getUserProfile();
         this.wrapper.classList.add('modal-wrapper');
