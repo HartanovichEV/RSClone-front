@@ -4267,6 +4267,14 @@ function sideMenuListener() {
         }
     };
 }
+function changeUserData() {
+    const form = document.querySelector('.user-info__form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const result = new FormData(form);
+        (0,_model_api_users__WEBPACK_IMPORTED_MODULE_13__.changeUser)(result);
+    });
+}
 function userPageRequests() {
     const main = document.querySelector('main');
     const newMain = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
@@ -4413,10 +4421,9 @@ function registerSubmitListener() {
             avatar: (_a = elements.avatar.files) === null || _a === void 0 ? void 0 : _a[0],
         };
         const result = new FormData(form);
-        console.log(result.get('login'));
         const dataValidated = (0,_model_api_registration__WEBPACK_IMPORTED_MODULE_0__.registerValidation)(user);
         if (dataValidated.err)
-            return alert(dataValidated.message);
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_15__.showMessage)(dataValidated.message, dataValidated.err);
         (0,_model_api_registration__WEBPACK_IMPORTED_MODULE_0__.registerRequest)(result);
     });
 }
@@ -4516,11 +4523,18 @@ function myPageParticipates() {
     const newMain = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
     usersMainSection.innerHTML = '';
     usersMainSection.innerHTML += newMain.getMyParticipates();
-    //usersMainSection.innerHTML += newMain.getUserPaginationBtnsSection(); 
     (0,_utils_renderMyParticipateCard__WEBPACK_IMPORTED_MODULE_10__["default"])(myParticipates);
     openUserCloseRequestListener();
-    //const openRequestBtn = document.querySelector('.buttons-section__btn-apply') as HTMLButtonElement;
-    //openRequestBtn.addEventListener('click', showRequest);
+    const btns = document.querySelectorAll('.my-participate__close');
+    [...btns].map(btn => btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const currentBtn = event.target;
+        const applyId = currentBtn.getAttribute('applyId');
+        if (!applyId)
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_15__.showMessage)('что-то пошло не так', true);
+        (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_8__.removeParticipation)(+applyId);
+        setTimeout(() => location.reload(), 2500);
+    }));
 }
 function renderMyParticipates() {
     const myParticipatesBtn = document.querySelector('.my-participates-btn');
@@ -4615,6 +4629,7 @@ function addUserListeners() {
     giveThanksListener();
     //sortRating();
     renderUserRating();
+    changeUserData();
 }
 
 __webpack_async_result__();
@@ -4741,14 +4756,14 @@ async function removeParticipation(applyId) {
             },
         });
         if (response.status === 200) {
-            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Заявка на помощь убрана');
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Заявка на помощь убрана');
         }
         else
-            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)(`Ошибка ${response.status}`, true);
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)(`Ошибка ${response.status}`, true);
     }
     catch (err) {
         if (err instanceof Error)
-            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Проблемы с подключением к серверу', true);
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Проблемы с подключением к серверу', true);
     }
 }
 
@@ -4819,10 +4834,10 @@ async function logout() {
     try {
         const response = await fetch(`${SERVER}/logout`);
         console.log(response.status);
-        window.location.href = 'http://localhost:8080/';
+        window.location.href = "https://hartanovichev.github.io/RSClone-front/rs-clone/";
     }
     catch (err) {
-        console.log(err);
+        (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Ошибка выхода', true);
     }
 }
 
@@ -4966,10 +4981,13 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "allUsers": () => (/* binding */ allUsers),
+/* harmony export */   "changeUser": () => (/* binding */ changeUser),
 /* harmony export */   "getAuthUserData": () => (/* binding */ getAuthUserData),
 /* harmony export */   "getUsers": () => (/* binding */ getUsers)
 /* harmony export */ });
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/build/jwt-decode.esm.js");
+/* harmony import */ var _utils_showMessage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/showMessage */ "./src/components/utils/showMessage.ts");
+
 
 const SERVER = "https://ancient-tundra-73432.herokuapp.com";
 function getAuthUserData() {
@@ -4986,6 +5004,31 @@ async function getUsers() {
     }
     catch (err) {
         return [];
+    }
+}
+async function changeUser(user) {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${SERVER}/user`, {
+            method: 'PUT',
+            body: user,
+            headers: {
+                'authorization': `Bearer ${token}`,
+            },
+        });
+        const result = await response.json();
+        const newToken = result.accessToken;
+        if (response.status === 201) {
+            localStorage.setItem('token', newToken);
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_1__.showMessage)('Пользователь успешно изменён');
+            setTimeout(() => window.location.href = "https://hartanovichev.github.io/RSClone-front/rs-clone/user.html", 2500);
+        }
+        else
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_1__.showMessage)(`Ошибка ${response.status}`, true);
+    }
+    catch (err) {
+        if (err instanceof Error)
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_1__.showMessage)('Проблемы с подключением к серверу', true);
     }
 }
 const allUsers = await getUsers();
@@ -5103,6 +5146,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_con
 
 
 const mainPage = _model_pageState__WEBPACK_IMPORTED_MODULE_2__.pageState[0];
+const applies = (0,_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.getOpenApplies)(_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies);
 function carousel() {
     const cards = document.querySelector('.slider__items');
     const ITEM_LEFT = document.querySelector('.slider__item-left');
@@ -5123,13 +5167,13 @@ function carousel() {
     }
     function createCards(index) {
         for (index; index < cardsOnPage; index++) {
-            const divLeft = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies[index], mainPage);
+            const divLeft = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(applies[index], mainPage);
             if (divLeft)
                 ITEM_LEFT.appendChild(divLeft);
-            const divActiv = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies[index + cardsOnPage], mainPage);
+            const divActiv = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(applies[index + cardsOnPage], mainPage);
             if (divActiv)
                 ITEM_ACTIVE.appendChild(divActiv);
-            const divRight = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies[index + (cardsOnPage * 2)], mainPage);
+            const divRight = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(applies[index + (cardsOnPage * 2)], mainPage);
             if (divRight)
                 ITEM_RIGHT.appendChild(divRight);
         }
@@ -5158,8 +5202,8 @@ function carousel() {
             ITEM_LEFT.innerHTML = '';
             while (cardsWhile) {
                 if (currentIndex === 0)
-                    currentIndex = _controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies.length - 1;
-                const div = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies[currentIndex], mainPage);
+                    currentIndex = applies.length - 1;
+                const div = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(applies[currentIndex], mainPage);
                 if (div)
                     ITEM_LEFT.appendChild(div);
                 currentIndex--;
@@ -5176,9 +5220,9 @@ function carousel() {
             ITEM_ACTIVE.innerHTML = ITEM_RIGHT.innerHTML;
             ITEM_RIGHT.innerHTML = '';
             while (cardsWhile) {
-                if (currentIndex === _controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies.length)
+                if (currentIndex === applies.length)
                     currentIndex = 0;
-                const div = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_3__.allApplies[currentIndex], mainPage);
+                const div = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(applies[currentIndex], mainPage);
                 if (div)
                     ITEM_RIGHT.appendChild(div);
                 currentIndex++;
@@ -5546,6 +5590,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _renderRequestCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./renderRequestCard */ "./src/components/utils/renderRequestCard.ts");
 /* harmony import */ var _model_pageState__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/pageState */ "./src/components/model/pageState.ts");
 /* harmony import */ var _model_api_applies__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/api/applies */ "./src/components/model/api/applies.ts");
+/* harmony import */ var _showMessage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./showMessage */ "./src/components/utils/showMessage.ts");
+
 
 
 
@@ -5583,8 +5629,10 @@ function pagination(array) {
         const helpBtns = document.querySelectorAll('.card__login-btn');
         [...helpBtns].map(item => item.addEventListener('click', (event) => {
             const applyId = (event === null || event === void 0 ? void 0 : event.target).getAttribute('applyId');
-            if (applyId)
-                (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_2__.participateInApply)(+applyId);
+            if (!applyId)
+                return (0,_showMessage__WEBPACK_IMPORTED_MODULE_3__.showMessage)('Что-то не так с заявкой', true);
+            (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_2__.participateInApply)(+applyId);
+            setTimeout(() => location.reload(), 2500);
         }));
     }
     createPageWithFilters(indexStartRender);
@@ -5705,9 +5753,7 @@ function createDivMyParticipateCard(data) {
         </ul>
       </div>
       <div class="card__btn">
-        <button class="btn color-btn my-participate__close" participateId = "${data.id}">
-          Отклонить мое предложение
-        </button>
+        <button class="btn color-btn my-participate__close" applyId = "${data.id}">Отклонить мое предложение</button>
       </div>                
       `;
     return div;
@@ -5869,8 +5915,6 @@ function showMessage(textMessage, error = false) {
         return true;
     return false;
 }
-// Подключаем так:
-//слушатель.addEventListener('событие', function (){ showMessage('hello word'); });
 
 
 /***/ }),
@@ -6643,15 +6687,16 @@ class Modal {
             <div class="user-info__subtitles">
               <p class="user-info__subtitle">Логин:</p>
               <p class="user-info__subtitle">Почта:</p>
-              <p class="user-info__subtitle">Рейтинг:</p>
+              <p class="user-info__subtitle">Имя:</p>
             </div>
-            <form class="user-info__form">
+            <form class="user-info__form" id="changeProfileForm">
               <div class="user-info__inputs">
-                <input type="text" class="user-info__input content__sex" placeholder="${user.login}">
-                <input type="text" class="user-info__input content__age" placeholder="${user.email}">
-                <input type="text" class="user-info__input content__rating" placeholder="${user.goodThings}" disabled>
+                <input type="text" class="user-info__input content__login" name="login" placeholder="${user.login}">
+                <input type="text" class="user-info__input content__email" name="email" placeholder="${user.email}">
+                <input type="text" class="user-info__input content__name" name="name" placeholder="${user.name}">
                 <input type="file" class="modal__input" id="change__avatar" name="avatar">
-                <input type="submit" class="user-info__submit-input" id="changeProfile">
+                <button type="submit" class="user-info__submit-input" id="changeProfile" 
+                form = "changeProfileForm"></button>
               </div>
             </form>
           </div>
