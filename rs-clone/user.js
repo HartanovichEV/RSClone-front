@@ -3934,17 +3934,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ App)
 /* harmony export */ });
 /* harmony import */ var _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/listeners/listeners */ "./src/components/controller/listeners/listeners.ts");
-/* harmony import */ var _model_fakeDatabase_rating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/fakeDatabase/rating */ "./src/components/model/fakeDatabase/rating.ts");
-/* harmony import */ var _model_api_authorization__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/api/authorization */ "./src/components/model/api/authorization.ts");
-/* harmony import */ var _view_footer_footer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../view/footer/footer */ "./src/components/view/footer/footer.ts");
-/* harmony import */ var _view_header_header__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../view/header/header */ "./src/components/view/header/header.ts");
-/* harmony import */ var _view_main_main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../view/main/main */ "./src/components/view/main/main.ts");
-/* harmony import */ var _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../view/modal/modal */ "./src/components/view/modal/modal.ts");
-/* harmony import */ var _utils_getSortedRatingArr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/getSortedRatingArr */ "./src/components/utils/getSortedRatingArr.ts");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_0__]);
-_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
-
-
+/* harmony import */ var _model_api_authorization__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/api/authorization */ "./src/components/model/api/authorization.ts");
+/* harmony import */ var _view_footer_footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../view/footer/footer */ "./src/components/view/footer/footer.ts");
+/* harmony import */ var _view_header_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../view/header/header */ "./src/components/view/header/header.ts");
+/* harmony import */ var _view_main_main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../view/main/main */ "./src/components/view/main/main.ts");
+/* harmony import */ var _view_modal_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../view/modal/modal */ "./src/components/view/modal/modal.ts");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_0__, _view_header_header__WEBPACK_IMPORTED_MODULE_3__, _view_main_main__WEBPACK_IMPORTED_MODULE_4__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_5__]);
+([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_0__, _view_header_header__WEBPACK_IMPORTED_MODULE_3__, _view_main_main__WEBPACK_IMPORTED_MODULE_4__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_5__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -3954,17 +3950,17 @@ _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_
 class App {
     constructor() {
         this.body = document.body;
-        this.header = new _view_header_header__WEBPACK_IMPORTED_MODULE_4__["default"]();
-        this.main = new _view_main_main__WEBPACK_IMPORTED_MODULE_5__["default"]();
-        this.footer = new _view_footer_footer__WEBPACK_IMPORTED_MODULE_3__["default"]();
+        this.header = new _view_header_header__WEBPACK_IMPORTED_MODULE_3__["default"]();
+        this.main = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
+        this.footer = new _view_footer_footer__WEBPACK_IMPORTED_MODULE_2__["default"]();
     }
     async init(page = 'main') {
-        const isAuth = await (0,_model_api_authorization__WEBPACK_IMPORTED_MODULE_2__.isAuthorized)();
+        const isAuth = await (0,_model_api_authorization__WEBPACK_IMPORTED_MODULE_1__.isAuthorized)();
         if (page === 'main' && isAuth)
-            window.location.href = 'http://localhost:8080/user.html';
+            window.location.href = document.location.origin + '/user.html';
         else if (page === 'user' && !isAuth)
-            window.location.href = 'http://localhost:8080/';
-        const modals = new _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__["default"]().render((0,_utils_getSortedRatingArr__WEBPACK_IMPORTED_MODULE_7__.sortedArr)(_model_fakeDatabase_rating__WEBPACK_IMPORTED_MODULE_1__.rating));
+            window.location.href = document.location.origin;
+        const modals = new _view_modal_modal__WEBPACK_IMPORTED_MODULE_5__["default"]().render();
         this.body.append(modals);
         this.body.append(this.header.render(page));
         this.body.append(this.main.render(page));
@@ -4008,6 +4004,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
 /* harmony import */ var _createAppliesWithUser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createAppliesWithUser */ "./src/components/controller/dataHandlers/createAppliesWithUser.ts");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_model_api_users__WEBPACK_IMPORTED_MODULE_0__, _createAppliesWithUser__WEBPACK_IMPORTED_MODULE_1__]);
+([_model_api_users__WEBPACK_IMPORTED_MODULE_0__, _createAppliesWithUser__WEBPACK_IMPORTED_MODULE_1__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 //import { getApplies } from "../../model/api/applies";
 
 
@@ -4040,9 +4038,10 @@ __webpack_async_result__();
 /*!*************************************************************************!*\
   !*** ./src/components/controller/dataHandlers/createAppliesWithUser.ts ***!
   \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "allAppliesWithUsers": () => (/* binding */ allAppliesWithUsers),
@@ -4050,6 +4049,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
 /* harmony import */ var _model_api_applies__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../model/api/applies */ "./src/components/model/api/applies.ts");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_model_api_users__WEBPACK_IMPORTED_MODULE_0__]);
+_model_api_users__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 function createAppliesWithUser(users, applies) {
@@ -4067,6 +4068,8 @@ async function allAppliesWithUsers() {
     return allApplies;
 }
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -4109,6 +4112,44 @@ function getRequestFormData() {
 
 /***/ }),
 
+/***/ "./src/components/controller/dataHandlers/thanksFilters.ts":
+/*!*****************************************************************!*\
+  !*** ./src/components/controller/dataHandlers/thanksFilters.ts ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getAllThanksWithDescription": () => (/* binding */ getAllThanksWithDescription)
+/* harmony export */ });
+function getAllThanksWithDescription(thanks) {
+    return thanks.filter(thank => thank.description);
+}
+
+
+/***/ }),
+
+/***/ "./src/components/controller/dataHandlers/userFilters.ts":
+/*!***************************************************************!*\
+  !*** ./src/components/controller/dataHandlers/userFilters.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getParticipantsInApply": () => (/* binding */ getParticipantsInApply),
+/* harmony export */   "getParticipantsInThanks": () => (/* binding */ getParticipantsInThanks),
+/* harmony export */   "getUsersRating": () => (/* binding */ getUsersRating)
+/* harmony export */ });
+const getUsersRating = (users) => users.sort((a, b) => b.goodThings - a.goodThings);
+const getParticipantsInApply = (users, apply) => users.filter(user => apply.participants.some(part => part === user.id));
+const getParticipantsInThanks = (users, thanks) => users.filter(user => thanks.participants.some(thank => thank === user.id));
+
+
+/***/ }),
+
 /***/ "./src/components/controller/listeners/listeners.ts":
 /*!**********************************************************!*\
   !*** ./src/components/controller/listeners/listeners.ts ***!
@@ -4124,6 +4165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "authSubmitListener": () => (/* binding */ authSubmitListener),
 /* harmony export */   "closeModalWindowListener": () => (/* binding */ closeModalWindowListener),
 /* harmony export */   "createRequestListener": () => (/* binding */ createRequestListener),
+/* harmony export */   "giveThanksListener": () => (/* binding */ giveThanksListener),
 /* harmony export */   "globalCloseModal": () => (/* binding */ globalCloseModal),
 /* harmony export */   "logoutListener": () => (/* binding */ logoutListener),
 /* harmony export */   "openLoginWindowListener": () => (/* binding */ openLoginWindowListener),
@@ -4133,8 +4175,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "openUserProfile": () => (/* binding */ openUserProfile),
 /* harmony export */   "radioBtnListener": () => (/* binding */ radioBtnListener),
 /* harmony export */   "registerSubmitListener": () => (/* binding */ registerSubmitListener),
+/* harmony export */   "renderMyParticipates": () => (/* binding */ renderMyParticipates),
 /* harmony export */   "renderMyRequests": () => (/* binding */ renderMyRequests),
+/* harmony export */   "renderMyThanks": () => (/* binding */ renderMyThanks),
 /* harmony export */   "renderUserPageRequests": () => (/* binding */ renderUserPageRequests),
+/* harmony export */   "renderUserRating": () => (/* binding */ renderUserRating),
 /* harmony export */   "showLogin": () => (/* binding */ showLogin),
 /* harmony export */   "showMessageEmail": () => (/* binding */ showMessageEmail),
 /* harmony export */   "sideMenuListener": () => (/* binding */ sideMenuListener),
@@ -4151,10 +4196,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_filtersMenuToggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/filtersMenuToggle */ "./src/components/utils/filtersMenuToggle.ts");
 /* harmony import */ var _model_api_applies__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../model/api/applies */ "./src/components/model/api/applies.ts");
 /* harmony import */ var _utils_renderMyRequestCard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utils/renderMyRequestCard */ "./src/components/utils/renderMyRequestCard.ts");
-/* harmony import */ var _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../dataHandlers/applyFilters */ "./src/components/controller/dataHandlers/applyFilters.ts");
+/* harmony import */ var _utils_renderMyParticipateCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../utils/renderMyParticipateCard */ "./src/components/utils/renderMyParticipateCard.ts");
+/* harmony import */ var _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../dataHandlers/applyFilters */ "./src/components/controller/dataHandlers/applyFilters.ts");
+/* harmony import */ var _dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../dataHandlers/userFilters */ "./src/components/controller/dataHandlers/userFilters.ts");
+/* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
+/* harmony import */ var _model_api_thanks__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../model/api/thanks */ "./src/components/model/api/thanks.ts");
+/* harmony import */ var _utils_showMessage__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../utils/showMessage */ "./src/components/utils/showMessage.ts");
+/* harmony import */ var _dataHandlers_thanksFilters__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../dataHandlers/thanksFilters */ "./src/components/controller/dataHandlers/thanksFilters.ts");
 /* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_utils_pagination__WEBPACK_IMPORTED_MODULE_3__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__]);
-([_utils_pagination__WEBPACK_IMPORTED_MODULE_3__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_view_main_main__WEBPACK_IMPORTED_MODULE_4__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__, _model_api_users__WEBPACK_IMPORTED_MODULE_14__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_15__]);
+([_view_main_main__WEBPACK_IMPORTED_MODULE_4__, _utils_filters__WEBPACK_IMPORTED_MODULE_5__, _view_modal_modal__WEBPACK_IMPORTED_MODULE_6__, _dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__, _model_api_users__WEBPACK_IMPORTED_MODULE_14__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_15__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -4167,9 +4218,17 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_uti
 
 
 
-const openApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.getOpenApplies)(_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.allApplies);
-const myApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.getMyCreatedApplies)(openApplies);
-const NotMyApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_11__.getNotMyApplies)(openApplies);
+
+
+
+
+
+
+const openApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__.getOpenApplies)(_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__.allApplies);
+const myApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__.getMyCreatedApplies)(openApplies);
+const myParticipates = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__.getMyParticipateApplies)(openApplies);
+const NotMyApplies = (0,_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_12__.getNotMyApplies)(openApplies);
+const sortedUsers = (0,_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_13__.getUsersRating)(_model_api_users__WEBPACK_IMPORTED_MODULE_14__.allUsers);
 function hideModal() {
     const registerModal = document.querySelectorAll('.modal');
     [...registerModal].map(item => {
@@ -4260,7 +4319,25 @@ function showCloseRequest() {
             (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_9__.closeApply)(+applyId);
         hideModal();
     });
-    function showCloseRequestBtns() {
+    async function showCloseRequestBtns() {
+        hideModal();
+        const participantsBlock = document.querySelector('.close-request__checkboxes');
+        let applyInfo;
+        if (applyId) {
+            applyInfo = await (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_9__.getApply)(+applyId);
+            const participants = (0,_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_13__.getParticipantsInApply)(_model_api_users__WEBPACK_IMPORTED_MODULE_14__.allUsers, applyInfo[0]);
+            if (participants.length === 0) {
+                (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_9__.closeApply)(+applyId, 'Мы рады что вам помогли, хоть и не с нашего сайта');
+                setTimeout(() => location.reload(), 4000);
+                return;
+            }
+            participantsBlock.innerHTML = participants.reduce((sum, part) => sum += `<label for="userId${part.id}" class="close-request__label">
+      <input type="checkbox" class="close-request__checkbox" value = "${part.id}" id="userId${part.id}">
+      <div class="close-request__volunteers">
+        <img src=${part.avatar} class="avatar" alt="Avatar">
+        ${part.name}
+      </div></label>`, '');
+        }
         const requestModalHelp = document.querySelector('.close-request');
         document.body.classList.add('modal--open');
         requestModalHelp.classList.remove('modal--hidden');
@@ -4349,11 +4426,31 @@ function authSubmitListener() {
         (0,_model_api_authorization__WEBPACK_IMPORTED_MODULE_2__.authorizeRequest)(user);
     });
 }
+function giveThanksListener() {
+    const thanksForm = document.querySelector('.close-request__form');
+    thanksForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const data = thanksForm.elements;
+        const participants = [];
+        const checkboxes = thanksForm.querySelectorAll('input[type=checkbox]:checked');
+        checkboxes.forEach(cb => participants.push(+cb.value));
+        if (participants.length === 0)
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_16__.showMessage)('Вы должны выбрать тех кто вам помог, или закрыть форму', true);
+        const thank = {
+            description: data.description.value,
+            participants: participants,
+            applyId: +localStorage.getItem('applyId'),
+        };
+        (0,_model_api_thanks__WEBPACK_IMPORTED_MODULE_15__.createThanks)(thank);
+    });
+}
 function createRequestListener() {
     const requestForm = document.getElementById('requestForm');
-    requestForm.addEventListener('submit', (event) => {
+    requestForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const result = (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_9__.createApply)((0,_dataHandlers_getRequestFormData__WEBPACK_IMPORTED_MODULE_1__["default"])());
+        const result = await (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_9__.createApply)((0,_dataHandlers_getRequestFormData__WEBPACK_IMPORTED_MODULE_1__["default"])());
+        if (!result)
+            hideModal();
         return result;
     });
 }
@@ -4384,16 +4481,42 @@ function myPageRequests() {
     const newMain = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
     usersMainSection.innerHTML = '';
     usersMainSection.innerHTML += newMain.getMyRequests();
-    //usersMainSection.innerHTML += newMain.getUserPaginationBtnsSection();
     (0,_utils_renderMyRequestCard__WEBPACK_IMPORTED_MODULE_10__["default"])(myApplies);
-    sideMenuListener();
     openUserCloseRequestListener();
+    const wrapper = document.querySelector('.user-section-main__wrapper');
+    wrapper.classList.add('my-requests-section-wrapper');
     const openRequestBtn = document.querySelector('.buttons-section__btn-apply');
     openRequestBtn.addEventListener('click', showRequest);
 }
 function renderMyRequests() {
     const myRequestsBtn = document.querySelector('.my-requests-btn');
     myRequestsBtn.addEventListener('click', myPageRequests);
+}
+function myPageParticipates() {
+    const usersMainSection = document.querySelector('.users-main-section');
+    const newMain = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
+    usersMainSection.innerHTML = '';
+    usersMainSection.innerHTML += newMain.getMyParticipates();
+    //usersMainSection.innerHTML += newMain.getUserPaginationBtnsSection(); 
+    (0,_utils_renderMyParticipateCard__WEBPACK_IMPORTED_MODULE_11__["default"])(myParticipates);
+    openUserCloseRequestListener();
+    //const openRequestBtn = document.querySelector('.buttons-section__btn-apply') as HTMLButtonElement;
+    //openRequestBtn.addEventListener('click', showRequest);
+}
+function renderMyParticipates() {
+    const myParticipatesBtn = document.querySelector('.my-participates-btn');
+    myParticipatesBtn.addEventListener('click', myPageParticipates);
+}
+function UserRating() {
+    const usersMainSection = document.querySelector('.users-main-section');
+    const newMain = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
+    usersMainSection.innerHTML = '';
+    usersMainSection.innerHTML += newMain.getRating(sortedUsers);
+    openUserCloseRequestListener();
+}
+function renderUserRating() {
+    const thanksSectionBtn = document.querySelector('.thanks-section-btn');
+    thanksSectionBtn.addEventListener('click', UserRating);
 }
 function openRatingWindow() {
     const ratingbtn = document.querySelector('.thanks-section__btn');
@@ -4438,6 +4561,16 @@ function openUserProfile() {
         profile.classList.add('modal--active');
     };
 }
+function myThanksPage() {
+    const usersMainSection = document.querySelector('.users-main-section');
+    const newMain = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
+    usersMainSection.innerHTML = '';
+    usersMainSection.innerHTML += newMain.getUserThanksSection((0,_dataHandlers_thanksFilters__WEBPACK_IMPORTED_MODULE_17__.getAllThanksWithDescription)(_model_api_thanks__WEBPACK_IMPORTED_MODULE_15__.allThanks));
+}
+function renderMyThanks() {
+    const myThanksBtn = document.querySelector('.my-thanks-btn');
+    myThanksBtn.addEventListener('click', myThanksPage);
+}
 function addListeners() {
     openRegisterWindowListener();
     openLoginWindowListener();
@@ -4447,19 +4580,22 @@ function addListeners() {
     authSubmitListener();
     radioBtnListener();
     globalCloseModal();
-    sortRating();
+    //sortRating();
 }
 function addUserListeners() {
     renderUserPageRequests();
-    // openUserRequestListener();
     closeModalWindowListener();
     globalCloseModal();
     renderMyRequests();
-    //openUserCloseRequestListener();
     logoutListener();
     createRequestListener();
     openUserProfile();
     renderMyRequests();
+    renderMyParticipates();
+    renderMyThanks();
+    giveThanksListener();
+    //sortRating();
+    renderUserRating();
 }
 
 __webpack_async_result__();
@@ -4479,10 +4615,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "closeApply": () => (/* binding */ closeApply),
 /* harmony export */   "createApply": () => (/* binding */ createApply),
 /* harmony export */   "getApplies": () => (/* binding */ getApplies),
+/* harmony export */   "getApply": () => (/* binding */ getApply),
 /* harmony export */   "participateInApply": () => (/* binding */ participateInApply),
 /* harmony export */   "removeParticipation": () => (/* binding */ removeParticipation)
 /* harmony export */ });
 /* harmony import */ var _utils_showMessage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/showMessage */ "./src/components/utils/showMessage.ts");
+/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
 
 const SERVER = "https://ancient-tundra-73432.herokuapp.com";
 async function getApplies() {
@@ -4496,8 +4634,21 @@ async function getApplies() {
             return err;
     }
 }
+async function getApply(applyId) {
+    try {
+        const response = await fetch(`${SERVER}/apply/${applyId}`);
+        const result = await response.json();
+        return [Object.assign({}, result)];
+    }
+    catch (err) {
+        if (err instanceof Error)
+            return [];
+    }
+    return [];
+}
 async function createApply(apply) {
     try {
+        console.log(apply);
         const token = localStorage.getItem('token');
         const response = await fetch(`${SERVER}/apply`, {
             method: 'POST',
@@ -4508,17 +4659,17 @@ async function createApply(apply) {
             body: JSON.stringify(apply),
         });
         if (response.status === 200) {
-            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Заявка успешно создана');
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Заявка успешно создана');
         }
         else
-            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)(`Ошибка ${response.status}`, true);
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)(`Ошибка ${response.status}`, true);
     }
     catch (err) {
         if (err instanceof Error)
-            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Проблемы с подключением к серверу', true);
+            return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Проблемы с подключением к серверу', true);
     }
 }
-async function closeApply(applyId) {
+async function closeApply(applyId, message = 'Заявка успешно закрыта') {
     try {
         const token = localStorage.getItem('token');
         const response = await fetch(`${SERVER}/apply/${applyId}`, {
@@ -4529,7 +4680,7 @@ async function closeApply(applyId) {
             },
         });
         if (response.status === 200) {
-            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Заявка успешно закрыта');
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)(message);
         }
         else
             (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)(`Ошибка ${response.status}`, true);
@@ -4542,7 +4693,7 @@ async function closeApply(applyId) {
 async function participateInApply(applyId) {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`${SERVER}/apply/${applyId}`, {
+        const response = await fetch(`${SERVER}/participate/${applyId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
@@ -4563,7 +4714,7 @@ async function participateInApply(applyId) {
 async function removeParticipation(applyId) {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`${SERVER}/apply/${applyId}`, {
+        const response = await fetch(`${SERVER}/participate/${applyId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
@@ -4598,7 +4749,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "isAuthorized": () => (/* binding */ isAuthorized),
 /* harmony export */   "logout": () => (/* binding */ logout)
 /* harmony export */ });
+/* harmony import */ var _utils_showMessage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/showMessage */ "./src/components/utils/showMessage.ts");
 /* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
+
 const SERVER = "https://ancient-tundra-73432.herokuapp.com";
 async function authorizeRequest(user) {
     try {
@@ -4611,10 +4764,13 @@ async function authorizeRequest(user) {
         });
         const result = await response.json();
         const token = result.accessToken;
-        const userId = result.accessToken;
-        localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
-        window.location.href = 'http://localhost:8080/user.html';
+        if (response.status === 200) {
+            localStorage.setItem('token', token);
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Вы успешно авторизованы');
+            setTimeout(() => window.location.href = document.location.origin + '/user.html', 2500);
+        }
+        else
+            return ((0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Ошибка авторизации', true));
     }
     catch (err) {
         if (err instanceof Error)
@@ -4708,15 +4864,86 @@ async function registerRequest(user) {
 
 /***/ }),
 
+/***/ "./src/components/model/api/thanks.ts":
+/*!********************************************!*\
+  !*** ./src/components/model/api/thanks.ts ***!
+  \********************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "allThanks": () => (/* binding */ allThanks),
+/* harmony export */   "createThanks": () => (/* binding */ createThanks),
+/* harmony export */   "getThank": () => (/* binding */ getThank),
+/* harmony export */   "getThanks": () => (/* binding */ getThanks)
+/* harmony export */ });
+/* harmony import */ var _utils_showMessage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../utils/showMessage */ "./src/components/utils/showMessage.ts");
+
+const SERVER = "https://ancient-tundra-73432.herokuapp.com";
+async function getThanks() {
+    try {
+        const response = await fetch(`${SERVER}/thanks`);
+        const result = await response.json();
+        return result;
+    }
+    catch (err) {
+        return [];
+    }
+}
+async function getThank(applyId) {
+    try {
+        const response = await fetch(`${SERVER}/thanks/${applyId}`);
+        const result = await response.json();
+        return [Object.assign({}, result)];
+    }
+    catch (err) {
+        if (err instanceof Error)
+            return [];
+    }
+    return [];
+}
+async function createThanks(thanks) {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${SERVER}/thanks`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(thanks),
+        });
+        if (response.status === 200) {
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Благодарность успешно создана');
+        }
+        else
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)(`Ошибка ${response.status}`, true);
+    }
+    catch (err) {
+        if (err instanceof Error)
+            (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Проблемы с подключением к серверу', true);
+    }
+}
+const allThanks = await getThanks();
+
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
 /***/ "./src/components/model/api/users.ts":
 /*!*******************************************!*\
   !*** ./src/components/model/api/users.ts ***!
   \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "allUsers": () => (/* binding */ allUsers),
 /* harmony export */   "getAuthUserData": () => (/* binding */ getAuthUserData),
 /* harmony export */   "getUsers": () => (/* binding */ getUsers)
 /* harmony export */ });
@@ -4739,7 +4966,10 @@ async function getUsers() {
         return [];
     }
 }
+const allUsers = await getUsers();
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
 
 /***/ }),
 
@@ -4775,273 +5005,6 @@ const rating = [
         ava: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
         name: 'Светлана',
         score: 44,
-    },
-];
-
-
-/***/ }),
-
-/***/ "./src/components/model/fakeDatabase/userApply.ts":
-/*!********************************************************!*\
-  !*** ./src/components/model/fakeDatabase/userApply.ts ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "dataUserApply": () => (/* binding */ dataUserApply)
-/* harmony export */ });
-/* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/img/Владимир.png */ "./src/components/assets/img/Владимир.png");
-/* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/img/Елена.png */ "./src/components/assets/img/Елена.png");
-/* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/img/Светлана.png */ "./src/components/assets/img/Светлана.png");
-/* harmony import */ var _type_type__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../type/type */ "./src/components/model/type/type.ts");
-
-
-
-
-const dataUserApply = [
-    {
-        name: 'Владимир',
-        userId: 1,
-        participants: [],
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.healthcare,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.belarus,
-        location: 'г.Минск, пр. Независимости, д.64',
-        description: 'Прошу, может кто сможет передать продукты в 1 больницу.Все расходы готов оплатить.',
-        open: true,
-    },
-    {
-        name: 'Елена',
-        userId: 1,
-        participants: [],
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.emergency,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.belarus,
-        location: 'Ж/д вокзал Минск',
-        description: 'Rаждое воскресенье еду с дачи с полными сумками.Кто может помочь их поднести хотябы до метро...',
-        open: true,
-    },
-    {
-        name: 'Светлана',
-        userId: 1,
-        participants: [],
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.science,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.online,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.belarus,
-        description: 'Вторые сутки жутко зависает комп, аж бесит...Нужна помощь в переустановке винды.',
-        open: true,
-    },
-    {
-        name: 'Егор',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.veterans,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.russia,
-        location: 'г.Москва',
-        description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde voluptates quidem amet aperiam est
-      ratione, ut nulla blanditiis. Eaque consequuntur porro blanditiis doloremque. Harum eius assumenda quasi, 
-      rerum accusantium officia.`,
-        open: true,
-    },
-    {
-        name: 'Ольга',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.invalid,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.russia,
-        location: 'г.Солнечногорск',
-        description: 'Прошу оказать содействие по сбору подписей для установки пандуса',
-        open: true,
-    },
-    {
-        name: 'Юля',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category["сhildren"],
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.russia,
-        description: 'нужна помощь детям сиротам: игрушки, одежда, предметы первой необходимости',
-        open: true,
-    },
-    {
-        name: 'Денис',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.animal,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.ukraine,
-        location: 'г.Киев',
-        description: 'Возьмите пожалуйста собаку на передержку, буквально на два дня',
-        open: true,
-    },
-    {
-        name: 'Саша',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.nature,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.ukraine,
-        location: 'г.Одесса',
-        description: 'Ищу добровольцев убрать городской парк',
-        open: true,
-    },
-    {
-        name: 'Юля',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.education,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.online,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.ukraine,
-        description: 'Не понимаю задачку по математике',
-        open: true,
-    },
-    {
-        name: 'Даша',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.other,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.russia,
-        location: 'г.Гданьск',
-        description: 'Нужно машину помыть',
-        open: true,
-    },
-    {
-        name: 'Виталик',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.veterans,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.belarus,
-        location: 'д.Табуны',
-        description: 'Нужно починить забор соседу пенсионеру',
-        open: true,
-    },
-    {
-        name: 'Фаина',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.veterans,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.ukraine,
-        location: 'г.Одесса',
-        description: 'Люди добрые, помогите собрать урожай, совсем старая стала.',
-        open: true,
-    },
-    {
-        name: 'Зоя',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.healthcare,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.ukraine,
-        location: 'г.Одесса',
-        description: 'Организовываю дежурство по уходу за тяжелобольными',
-        open: true,
-    },
-    {
-        name: 'Петя',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.healthcare,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.ukraine,
-        location: 'г.Харьков',
-        description: 'Сбор вторсырья',
-        open: false,
-    },
-    {
-        name: 'Анатолий',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_2__,
-        userId: 1,
-        participants: [],
-        category: _type_type__WEBPACK_IMPORTED_MODULE_3__.Category.healthcare,
-        format: _type_type__WEBPACK_IMPORTED_MODULE_3__.Format.offline,
-        country: _type_type__WEBPACK_IMPORTED_MODULE_3__.Country.ukraine,
-        location: 'г.Львов',
-        description: 'Сбор вторсырья',
-        open: false,
-    },
-];
-
-
-/***/ }),
-
-/***/ "./src/components/model/fakeDatabase/userThanks.ts":
-/*!*********************************************************!*\
-  !*** ./src/components/model/fakeDatabase/userThanks.ts ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "userThanks": () => (/* binding */ userThanks)
-/* harmony export */ });
-/* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/img/Светлана.png */ "./src/components/assets/img/Светлана.png");
-/* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/img/Владимир.png */ "./src/components/assets/img/Владимир.png");
-
-
-const userThanks = [
-    {
-        name: 'Зоя',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        body: 'Спасибо ребятом из БГУИР общаги за покраску забора. Ваша помощь была очень нужна.',
-        target: 'Владимир',
-        targetAvatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-    },
-    {
-        name: 'Зайцы',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        body: 'Очень выручил в наводнение.',
-        target: 'Дед Мазай',
-        targetAvatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-    },
-    {
-        name: 'Клара',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        body: 'Спасибо, что вернул мои кораллы',
-        target: 'Шерлок Холмс',
-        targetAvatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-    },
-    {
-        name: 'Карл',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        body: 'Спасибо, что не упрятал за решётку',
-        target: 'Шерлок Холмс',
-        targetAvatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-    },
-    {
-        name: 'Гендальф',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        body: 'Спасибо, что бросил кольцо в Ородруин',
-        target: 'Фродо',
-        targetAvatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
-    },
-    {
-        name: 'Сара Коннор',
-        avatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_0__,
-        body: 'Спасибо, что защитил Джона',
-        target: 'Терминатор',
-        targetAvatar: _assets_img_png__WEBPACK_IMPORTED_MODULE_1__,
     },
 ];
 
@@ -5110,13 +5073,13 @@ var Category;
     Category["healthcare"] = "\u0417\u0434\u0440\u0430\u0432\u043E\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u0435";
     Category["emergency"] = "\u0427\u0421";
     Category["veterans"] = "\u041F\u0435\u043D\u0441\u0438\u043E\u043D\u0435\u0440\u044B";
-    Category["invalid"] = "\u041B\u044E\u0434\u0438 \u0441 \u041E\u0412\u0421";
-    Category["\u0441hildren"] = "\u0414\u0435\u0442\u0438 \u0438 \u043F\u043E\u0434\u0440\u043E\u0441\u0442\u043A\u0438";
-    Category["animal"] = "\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435";
+    Category["people"] = "\u041B\u044E\u0434\u0438 \u0441 \u041E\u0412\u0421";
+    Category["children"] = "\u0414\u0435\u0442\u0438 \u0438 \u043F\u043E\u0434\u0440\u043E\u0441\u0442\u043A\u0438";
+    Category["animals"] = "\u0416\u0438\u0432\u043E\u0442\u043D\u044B\u0435";
     Category["nature"] = "\u041F\u0440\u0438\u0440\u043E\u0434\u0430";
     Category["science"] = "\u041D\u0430\u0443\u043A\u0430";
     Category["education"] = "\u041E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u0435";
-    Category["other"] = "\u0414\u0440\u0443\u0433\u043E\u0435";
+    Category["else"] = "\u0414\u0440\u0443\u0433\u043E\u0435";
 })(Category || (Category = {}));
 var Format;
 (function (Format) {
@@ -5212,19 +5175,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "filterCountryChosen": () => (/* binding */ filterCountryChosen),
 /* harmony export */   "filterFormatChosen": () => (/* binding */ filterFormatChosen)
 /* harmony export */ });
-/* harmony import */ var _model_fakeDatabase_userApply__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model/fakeDatabase/userApply */ "./src/components/model/fakeDatabase/userApply.ts");
-/* harmony import */ var _model_type_type__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/type/type */ "./src/components/model/type/type.ts");
-/* harmony import */ var _classLocalStorage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./classLocalStorage */ "./src/components/utils/classLocalStorage.ts");
-/* harmony import */ var _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../controller/listeners/listeners */ "./src/components/controller/listeners/listeners.ts");
-/* harmony import */ var _pagination__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pagination */ "./src/components/utils/pagination.ts");
-/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_3__, _pagination__WEBPACK_IMPORTED_MODULE_4__]);
-([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_3__, _pagination__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var _model_type_type__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model/type/type */ "./src/components/model/type/type.ts");
+/* harmony import */ var _classLocalStorage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./classLocalStorage */ "./src/components/utils/classLocalStorage.ts");
+/* harmony import */ var _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../controller/listeners/listeners */ "./src/components/controller/listeners/listeners.ts");
+/* harmony import */ var _pagination__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pagination */ "./src/components/utils/pagination.ts");
+/* harmony import */ var _controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../controller/dataHandlers/applyFilters */ "./src/components/controller/dataHandlers/applyFilters.ts");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_2__, _controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_4__]);
+([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_2__, _controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
 
 
+const openApplies = (0,_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_4__.getOpenApplies)(_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_4__.allApplies);
+const notMyApplies = (0,_controller_dataHandlers_applyFilters__WEBPACK_IMPORTED_MODULE_4__.getNotMyApplies)(openApplies);
 let filterCategoryChosen = {
     healthcare: false,
     emergency: false,
@@ -5247,7 +5211,7 @@ let filterCountryChosen = {
     ukraine: false,
 };
 //localStorage
-const localStorage = new _classLocalStorage__WEBPACK_IMPORTED_MODULE_2__["default"]();
+const localStorage = new _classLocalStorage__WEBPACK_IMPORTED_MODULE_1__["default"]();
 function setLocalStorage() {
     localStorage.save('filterCategoryChosen', filterCategoryChosen);
     localStorage.save('filterFormatChosen', filterFormatChosen);
@@ -5273,10 +5237,10 @@ function checkFormatChosen(array) {
     if (!filterFormatChosen.online && !filterFormatChosen.offline)
         return array;
     if (filterFormatChosen.online) {
-        arrayWithFormatFilters = arrayWithFormatFilters.concat(array.filter(el => el.format === _model_type_type__WEBPACK_IMPORTED_MODULE_1__.Format.online));
+        arrayWithFormatFilters = arrayWithFormatFilters.concat(array.filter(el => el.format === _model_type_type__WEBPACK_IMPORTED_MODULE_0__.Format.online));
     }
     if (filterFormatChosen.offline) {
-        arrayWithFormatFilters = arrayWithFormatFilters.concat(array.filter(el => el.format === _model_type_type__WEBPACK_IMPORTED_MODULE_1__.Format.offline));
+        arrayWithFormatFilters = arrayWithFormatFilters.concat(array.filter(el => el.format === _model_type_type__WEBPACK_IMPORTED_MODULE_0__.Format.offline));
     }
     return arrayWithFormatFilters;
 }
@@ -5287,13 +5251,13 @@ function checkCountryChosen(array) {
     else {
         let arrayCountryChosen = [];
         if (filterCountryChosen.belarus) {
-            arrayCountryChosen = arrayCountryChosen.concat(array.filter(el => el.country === _model_type_type__WEBPACK_IMPORTED_MODULE_1__.Country.belarus));
+            arrayCountryChosen = arrayCountryChosen.concat(array.filter(el => el.country === _model_type_type__WEBPACK_IMPORTED_MODULE_0__.Country.belarus));
         }
         if (filterCountryChosen.russia) {
-            arrayCountryChosen = arrayCountryChosen.concat(array.filter(el => el.country === _model_type_type__WEBPACK_IMPORTED_MODULE_1__.Country.russia));
+            arrayCountryChosen = arrayCountryChosen.concat(array.filter(el => el.country === _model_type_type__WEBPACK_IMPORTED_MODULE_0__.Country.russia));
         }
         if (filterCountryChosen.ukraine) {
-            arrayCountryChosen = arrayCountryChosen.concat(array.filter(el => el.country === _model_type_type__WEBPACK_IMPORTED_MODULE_1__.Country.ukraine));
+            arrayCountryChosen = arrayCountryChosen.concat(array.filter(el => el.country === _model_type_type__WEBPACK_IMPORTED_MODULE_0__.Country.ukraine));
         }
         return arrayCountryChosen;
     }
@@ -5310,7 +5274,7 @@ function checkCategoryChosen(array) {
     const arrayWithCategoryFilters = array.filter(elem => {
         const arrayString = arrayNameFilters.map(el => {
             const key = el;
-            return String(_model_type_type__WEBPACK_IMPORTED_MODULE_1__.Category[key]);
+            return String(_model_type_type__WEBPACK_IMPORTED_MODULE_0__.Category[key]);
         });
         return arrayString.includes(elem.category);
     });
@@ -5399,27 +5363,24 @@ function getFilter(e) {
     }
     let arrayWithAllFilters = [];
     if (e.target === online || e.target === offline) {
-        const arrayWithFormatFilters = checkFormatChosen(_model_fakeDatabase_userApply__WEBPACK_IMPORTED_MODULE_0__.dataUserApply);
+        const arrayWithFormatFilters = checkFormatChosen(notMyApplies);
         const arrayWithCountryFilters = checkCountryChosen(arrayWithFormatFilters);
         arrayWithAllFilters = checkCategoryChosen(arrayWithCountryFilters);
     }
     else if (e.target === russia || e.target === belarus || e.target === ukraine) {
-        const arrayWithCountryFilters = checkCountryChosen(_model_fakeDatabase_userApply__WEBPACK_IMPORTED_MODULE_0__.dataUserApply);
+        const arrayWithCountryFilters = checkCountryChosen(notMyApplies);
         const arrayWithFormatFilters = checkFormatChosen(arrayWithCountryFilters);
         arrayWithAllFilters = checkCategoryChosen(arrayWithFormatFilters);
     }
     else {
-        const arrayWithCategoryFilters = checkCategoryChosen(_model_fakeDatabase_userApply__WEBPACK_IMPORTED_MODULE_0__.dataUserApply);
+        const arrayWithCategoryFilters = checkCategoryChosen(notMyApplies);
         const arrayWithFormatFilters = checkFormatChosen(arrayWithCategoryFilters);
         arrayWithAllFilters = checkCountryChosen(arrayWithFormatFilters);
     }
-    (0,_pagination__WEBPACK_IMPORTED_MODULE_4__.pagination)(arrayWithAllFilters);
+    (0,_pagination__WEBPACK_IMPORTED_MODULE_3__.pagination)(arrayWithAllFilters);
     pege.innerText = '1';
-    console.log(arrayWithAllFilters);
-    //+++++++++++
-    //++++++++++++++++
     const helpBtns = document.querySelectorAll('.card__login-btn');
-    [...helpBtns].map(item => item.addEventListener('click', _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_3__.showMessageEmail));
+    [...helpBtns].map(item => item.addEventListener('click', _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_2__.showMessageEmail));
 }
 
 __webpack_async_result__();
@@ -5491,46 +5452,25 @@ function hideFiltersMenu() {
 
 /***/ }),
 
-/***/ "./src/components/utils/getSortedRatingArr.ts":
-/*!****************************************************!*\
-  !*** ./src/components/utils/getSortedRatingArr.ts ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "sortedArr": () => (/* binding */ sortedArr)
-/* harmony export */ });
-const sortedArr = (arr) => {
-    return arr.sort((a, b) => b.score - a.score);
-};
-
-
-/***/ }),
-
 /***/ "./src/components/utils/pagination.ts":
 /*!********************************************!*\
   !*** ./src/components/utils/pagination.ts ***!
   \********************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getCardsOnPage": () => (/* binding */ getCardsOnPage),
 /* harmony export */   "pagination": () => (/* binding */ pagination)
 /* harmony export */ });
 /* harmony import */ var _renderRequestCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./renderRequestCard */ "./src/components/utils/renderRequestCard.ts");
-/* harmony import */ var _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controller/listeners/listeners */ "./src/components/controller/listeners/listeners.ts");
-/* harmony import */ var _model_pageState__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/pageState */ "./src/components/model/pageState.ts");
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_1__]);
-_controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_1__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+/* harmony import */ var _model_pageState__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../model/pageState */ "./src/components/model/pageState.ts");
+/* harmony import */ var _model_api_applies__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../model/api/applies */ "./src/components/model/api/applies.ts");
 
 
 
-const userPage = _model_pageState__WEBPACK_IMPORTED_MODULE_2__.pageState[1];
+const userPage = _model_pageState__WEBPACK_IMPORTED_MODULE_1__.pageState[1];
 function getCardsOnPage() {
     let cardsOnPage;
     if (window.matchMedia('(max-width: 767px)').matches) {
@@ -5557,12 +5497,16 @@ function pagination(array) {
     function createPageWithFilters(index) {
         requestsCards.innerHTML = '';
         for (let i = index; i < (index + cardsOnPage); i++) {
-            const div = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(array, i, userPage);
+            const div = (0,_renderRequestCard__WEBPACK_IMPORTED_MODULE_0__["default"])(array[i], userPage);
             if (div)
                 requestsCards.appendChild(div);
         }
         const helpBtns = document.querySelectorAll('.card__login-btn');
-        [...helpBtns].map(item => item.addEventListener('click', _controller_listeners_listeners__WEBPACK_IMPORTED_MODULE_1__.showMessageEmail));
+        [...helpBtns].map(item => item.addEventListener('click', (event) => {
+            const applyId = (event === null || event === void 0 ? void 0 : event.target).getAttribute('applyId');
+            if (applyId)
+                (0,_model_api_applies__WEBPACK_IMPORTED_MODULE_2__.participateInApply)(+applyId);
+        }));
     }
     createPageWithFilters(indexStartRender);
     if (!BTN_START.classList.contains('no-active'))
@@ -5641,8 +5585,63 @@ function pagination(array) {
     }
 }
 
-__webpack_async_result__();
-} catch(e) { __webpack_async_result__(e); } });
+
+/***/ }),
+
+/***/ "./src/components/utils/renderMyParticipateCard.ts":
+/*!*********************************************************!*\
+  !*** ./src/components/utils/renderMyParticipateCard.ts ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ getPageMyParticipates)
+/* harmony export */ });
+/* harmony import */ var _model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model/type/dateFormatter */ "./src/components/model/type/dateFormatter.ts");
+
+function createDivMyParticipateCard(data) {
+    const div = document.createElement('div');
+    div.className = 'card requests-section__card';
+    div.setAttribute('participateId', '' + data.id);
+    div.innerHTML = `                  
+        <div class="card__header">
+        <div class="card__name">${data.name}</div>
+        <div class="card__avatar">
+          <img src=${data.avatar} alt="Avatar">
+        </div>
+      </div>
+      <div class="card__title" title="${data.description}">${data.description}</div>
+      <div class="card__info">
+        <ul>
+          <li><span class="card__span">Категория:</span> ${data.category}</li>
+          <li><span class="card__span">Формат:</span> ${data.format}</li>
+          <li><span class="card__span">Страна:</span> ${data.country}</li>
+          ${(data.location) ? '<li><span class="card__span">Адрес:</span>' + data.location + '</li>' : ''}
+          ${(data.date) ? '<li><span class="card__span">Дата:</span>'
+        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__.dateFormatter)(new Date(data.date)) + '</li>' +
+        '<li><span class="card__span">Время:</span>'
+        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__.timeFormatter)(new Date(data.date)) + '</li>' : ''}
+        </ul>
+      </div>
+      <div class="card__btn">
+        <button class="btn color-btn my-requests__close" participateId = "${data.id}">Отклонить мое предложение</button>
+      </div>                
+      `;
+    return div;
+}
+function getPageMyParticipates(myApplies) {
+    const cardRequests = document.querySelector('.card-requests');
+    if (myApplies.length === 0)
+        cardRequests.innerHTML = 'Пока нет заявок, на которые Вы откликнулись.';
+    for (let i = 0; i < myApplies.length; i++) {
+        const div = createDivMyParticipateCard(myApplies[i]);
+        if (div)
+            cardRequests.appendChild(div);
+    }
+}
+
 
 /***/ }),
 
@@ -5658,7 +5657,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ getPageMyRequests)
 /* harmony export */ });
 /* harmony import */ var _model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model/type/dateFormatter */ "./src/components/model/type/dateFormatter.ts");
-/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
 
 function createDivMyRequestCard(data) {
     const div = document.createElement('div');
@@ -5687,7 +5685,6 @@ function createDivMyRequestCard(data) {
 }
 function getPageMyRequests(myApplies) {
     const cardRequests = document.querySelector('.card-requests');
-    console.log(myApplies);
     if (myApplies.length === 0)
         cardRequests.innerHTML = 'У вас пока нет заявок. Нажмите на + для добавления.';
     for (let i = 0; i < myApplies.length; i++) {
@@ -5711,42 +5708,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createDivItemCard)
 /* harmony export */ });
-/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
-function createDivItemCard(data, index, page) {
-    if (typeof data[index] === 'undefined')
+/* harmony import */ var _model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../model/type/dateFormatter */ "./src/components/model/type/dateFormatter.ts");
+
+function createDivItemCard(data, page) {
+    if (typeof data === 'undefined')
         return;
     const div = document.createElement('div');
-    const location = data[index].location ? data[index].location : '-';
-    let dateinfo = '-';
-    if (data[index].date) {
-        const date = String(data[index].date).split('T');
-        console.log(date);
-        dateinfo = date[0];
-    }
-    div.id = `${data[index].name}`;
+    div.setAttribute('applyId', '' + data.id);
     if (page === 'main')
         div.className = 'card';
     else
         div.className = 'card requests-section__card';
     div.innerHTML = `                   
                       <div class="card__header">
-                        <div class="card__name">${data[index].name}</div>
+                        <div class="card__name">${data.name}</div>
                         <div class="card__avatar">
-                          <img src=${data[index].avatar} alt="Avatar">
+                          <img src=${data.avatar} alt="Avatar">
                         </div>
                       </div>
-                      <div class="card__title" title="${data[index].description}">${data[index].description}</div>
+                      <div class="card__title" title="${data.description}">${data.description}</div>
                       <div class="card__info">
                         <ul>
-                          <li><span class="card__span">Категория:</span> ${data[index].category}</li>
-                          <li><span class="card__span">Формат:</span> ${data[index].format}</li>
-                          <li><span class="card__span">Страна:</span> ${data[index].country}</li>
-                          <li><span class="card__span">Адрес:</span> ${location}</li>
-                          <li><span class="card__span">Дата:</span> ${dateinfo}</li>
+                        <li><span class="card__span">Категория:</span> ${data.category}</li>
+                        <li><span class="card__span">Формат:</span> ${data.format}</li>
+                        <li><span class="card__span">Страна:</span> ${data.country}</li>
+                        ${(data.location) ? '<li><span class="card__span">Адрес:</span>' + data.location + '</li>' : ''}
+                        ${(data.date) ? '<li><span class="card__span">Дата:</span>'
+        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__.dateFormatter)(new Date(data.date)) + '</li>' +
+        '<li><span class="card__span">Время:</span>'
+        + (0,_model_type_dateFormatter__WEBPACK_IMPORTED_MODULE_0__.timeFormatter)(new Date(data.date)) + '</li>' : ''}
                         </ul>
                       </div>
                       <div class="card__btn">
-                        <button class="btn card__login-btn color-btn">Помочь</button>
+                        <button class="btn card__login-btn color-btn" applyId = "${data.id}">Помочь</button>
                       </div>`;
     return div;
 }
@@ -5830,9 +5824,10 @@ class Footer {
 /*!**********************************************!*\
   !*** ./src/components/view/header/header.ts ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Header)
@@ -5843,6 +5838,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_icons_thank_you_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/icons/thank-you.png */ "./src/components/assets/icons/thank-you.png");
 /* harmony import */ var _assets_icons_question_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/icons/question.png */ "./src/components/assets/icons/question.png");
 /* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_model_api_users__WEBPACK_IMPORTED_MODULE_5__]);
+_model_api_users__WEBPACK_IMPORTED_MODULE_5__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
@@ -5933,6 +5930,8 @@ class Header {
     }
 }
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -5940,15 +5939,25 @@ class Header {
 /*!******************************************!*\
   !*** ./src/components/view/main/main.ts ***!
   \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Main)
 /* harmony export */ });
-/* harmony import */ var _model_fakeDatabase_userThanks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../model/fakeDatabase/userThanks */ "./src/components/model/fakeDatabase/userThanks.ts");
-/* harmony import */ var _assets_img_back_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/img/back.png */ "./src/components/assets/img/back.png");
+/* harmony import */ var _assets_img_back_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/img/back.png */ "./src/components/assets/img/back.png");
+/* harmony import */ var _controller_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../controller/dataHandlers/userFilters */ "./src/components/controller/dataHandlers/userFilters.ts");
+/* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
+/* harmony import */ var _model_api_thanks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/api/thanks */ "./src/components/model/api/thanks.ts");
+/* harmony import */ var _controller_dataHandlers_thanksFilters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../controller/dataHandlers/thanksFilters */ "./src/components/controller/dataHandlers/thanksFilters.ts");
+/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_model_api_users__WEBPACK_IMPORTED_MODULE_2__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_3__]);
+([_model_api_users__WEBPACK_IMPORTED_MODULE_2__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
+
+
 
 
 class Main {
@@ -5973,7 +5982,7 @@ class Main {
     <section class="requests-section main-request-section" id="requests">
       <div class="container">
         <div class="slider">
-          <button class="btn slider__btn prev">←</button>
+          <button class="btn slider__btn slider-prev prev">←</button>
           <div class="slider__wrapper">
             <div class="slider__items">
               <div class="slider__item-left"></div>
@@ -5981,40 +5990,55 @@ class Main {
               <div class="slider__item-right"></div>
             </div>
           </div> 
-          <button class="btn slider__btn next">→</button>
+          <button class="btn slider__btn slider-next next">→</button>
         </div>
         <p>... успей им помочь</p>
         <div class="slider__frame3"></div>
       </div>
     <section>`;
     }
-    renderThanksCard(name, avatar, body, target, targetAvatar) {
+    renderThanksCard(item) {
+        const participants = (0,_controller_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_1__.getParticipantsInThanks)(_model_api_users__WEBPACK_IMPORTED_MODULE_2__.allUsers, item);
+        const user = _model_api_users__WEBPACK_IMPORTED_MODULE_2__.allUsers.find(u => u.id === item.userId);
+        console.log(participants);
         return `
     <div class="card thanks-card">
       <div class="card__header thanks-card__header">              
         <div class="card__avatar thanks-card-to__avatar">
-          <img src=${targetAvatar} alt="Avatar">
+          ${participants.reduce((sum, p) => sum += `<img src=${p.avatar} alt="Avatar" 
+          class="avatar avatar_participant"><span class='username'>${p.name}</span>`, '')}
         </div>
-        <p><span class="card__name thanks-card-to__name">${target}, </span>спасибо за</p>
+        <p><span class="card__name thanks-card-to__name"></span>спасибо за</p>
       </div>
-      <div class="card__title thanks-card__title">${body}</div>
+      <div class="card__title thanks-card__title">${item.description}</div>
       <div class="card__footer thanks-card__footer">
-        <div class="thanks-card-from__name">${name}</div>
+        <div class="thanks-card-from__name">${user === null || user === void 0 ? void 0 : user.name}</div>
         <div class="thanks-card-from__avatar">
-          <img src=${avatar} alt="Avatar">
+          <img src=${user === null || user === void 0 ? void 0 : user.avatar} alt="Avatar" class='avatar'>
         </div>
       </div>        
     </div>`;
     }
-    getThanksSection() {
+    getThanksSection(arr) {
         return `
     <section class="thanks-section" id="thanks">
       <h2 class="thanks-section__title">Копилка добрых дел </h2>
       <button class="btn thanks-section__btn">Лучшие вoлoнтеры</button>
       <div class="thanks-section__cards">
-        ${_model_fakeDatabase_userThanks__WEBPACK_IMPORTED_MODULE_0__.userThanks.map(item => this.renderThanksCard(item.name, item.avatar, item.body, item.target, item.targetAvatar)).join('')}      
+        ${arr.map(item => this.renderThanksCard(item)).join('')}      
       </div>        
       <div class="thanks-section__frame4"></div>        
+      </section>
+    `;
+    }
+    getUserThanksSection(arr) {
+        console.log(arr);
+        return `
+    <section class="thanks-section" id="thanks">
+      <h2 class="thanks-section__title">Копилка добрых дел </h2>
+      <div class="thanks-section__cards">
+        ${arr.map(item => this.renderThanksCard(item)).join('')}      
+      </div>        
       </section>
     `;
     }
@@ -6042,66 +6066,6 @@ class Main {
       <div class="info-section__frame5"></div>
     </section>`;
     }
-    getUserRequestsSection() {
-        return `
-    <section class="my-requests">
-    <div class="my-requests__frame6"></div>
-    <div class="container">
-      <h3 class="my-requests__title">Мои заявки:</h3>
-      <div class="card-requests">            
-        <div class="card">
-          <div class="card__header"></div>
-          <div class="card__title">
-            Прошу, может кто сможет передать продукты в 1 больницу. 
-            Все расходы готов оплатить. Буду очень благодарен.
-          </div>
-          <div class="card__info">
-            <ul>
-              <li><span class="card__span">Категория</span>: другое</li>
-              <li><span class="card__span">Адрес:</span> г.Минск, пр. Независимости, д.64</li>
-            </ul>
-          </div>
-          <div class="card__btn">
-            <button class="btn my-requests__btn my-requests__edit">
-              <img src=${_assets_img_back_png__WEBPACK_IMPORTED_MODULE_1__} alt="">
-            </button>                
-            <button class="btn my-requests__btn my-requests__close">&times;</button>
-          </div>                
-        </div>
-        <div class="card">
-          <div class="card__header"></div>
-          <div class="card__title">
-            Прошу, может кто сможет передать продукты в 1 больницу. 
-            Все расходы готов оплатить. Буду очень благодарен.
-          </div>
-          <div class="card__info">
-            <ul>
-              <li><span class="card__span">Категория</span>: другое</li>
-              <li><span class="card__span">Адрес:</span> г.Минск, пр. Независимости, д.64</li>
-            </ul>
-          </div>
-          <div class="card__btn">
-            <button class="btn my-requests__btn my-requests__edit">
-              <img src=${_assets_img_back_png__WEBPACK_IMPORTED_MODULE_1__} alt="">
-            </button>                
-            <button class="btn my-requests__btn my-requests__close">&times;</button>
-          </div>                
-        </div>
-      </div>
-    </div>        
-  </section>`;
-    }
-    getUserButtonsSection() {
-        return `
-    <section class="buttons-section">
-      <div class="buttons-section__frame7"></div>
-      <button class="btn buttons-section__btn-apply">Новая заявка</button>      
-      <button class="btn buttons-section__btn-requests-history">История заявок</button>
-      <div class="buttons-section__btn-requests__div"> 
-        <button class="btn buttons-section__btn-requests color-btn">Помочь</button>
-      </div>
-    </section>`;
-    }
     getWrapper() {
         return `
       <div class="user-section__wrapper">
@@ -6117,9 +6081,6 @@ class Main {
     getUserWrapper() {
         return `
       <div class="user-section-main__wrapper">        
-        <div class="side-menu">
-          <span class="side-menu__span">Меню</span>
-        </div>
         ${this.getUserMenuSection()}
         ${this.getUsersMain()}        
       </div>
@@ -6128,16 +6089,16 @@ class Main {
     getUserFiltersSection() {
         return ` 
     <section class="filters-section">
+      <a href="user.html">
+        <button class="btn filters-section__btn-back color-btn">
+          <img src=${_assets_img_back_png__WEBPACK_IMPORTED_MODULE_0__} alt="back">
+        </button>
+      </a> 
         <div class="filters-section__filters">
-        <a href="user.html">
-          <button class="btn filters-section__btn-back color-btn">
-            <img src=${_assets_img_back_png__WEBPACK_IMPORTED_MODULE_1__} alt="back">
-          </button>
-        </a> 
           <div class="filters-section__format">
             <h5 class="filters-section__title format__title">Выбрать формат</h5>
             <div class="filters-section__body">
-              <button class="filters-section__btn ofline">Офлайн</button>
+              <button class="filters-section__btn offline">Офлайн</button>
               <button class="filters-section__btn online">Онлайн</button>
             </div>
           </div>
@@ -6177,7 +6138,7 @@ class Main {
             <button class="menu-section__btn buttons-section__btn-requests">Все заявки</button>
             <button class="menu-section__btn my-requests-btn">Мои заявки</button>
             <button class="menu-section__btn my-thanks-btn">Благодарности</button>
-            <button class="menu-section__btn my-responds-btn">Мои отклики</button>
+            <button class="menu-section__btn my-participates-btn">Мои отклики</button>
             <button class="menu-section__btn thanks-section-btn">Рейтинг</button>
           </div>
         </div>
@@ -6214,6 +6175,49 @@ class Main {
     <div class="card-requests"></div>    
     `;
     }
+    getMyParticipates() {
+        return `
+    <div class="my-requests">
+      <h5 class="my-requests__title">Мои отклики - предложения о помощи:</h5>      
+    </div>
+    <div class="card-requests"></div>    
+    `;
+    }
+    renderRatingTable(num, ava, name, score) {
+        return `
+    <div class="user-rating__main">
+     
+        <div class="user-rating__name-body">
+          <div>${num}</div>
+          <div class="user-rating__main-ava">
+            <img src="${ava}" alt="Avatar">
+          </div>
+          <span class="user-rating__name-name">${name}</span>
+        </div>
+        <div class="user-rating__score">      
+          <span class="user-rating__score-score">${score}</span>
+        </div>
+      </div> 
+    `;
+    }
+    getRating(arr) {
+        return `
+    <div class="user-rating">  
+      <div class="user-rating__content">
+        <div class="user-rating__table">
+          <h6 class="user-rating__name-subtitle">№</h6>
+          <h6 class="user-rating__score-subtitle">Добрые<br>дела</h6>
+        </div>
+        <div class="user-rating__body">
+  ${arr.map((item, index) => {
+            return this.renderRatingTable(index + 1, item.avatar, item.name, item.goodThings);
+        }).join('')}
+        </div>
+      </div>     
+    </div>
+    <div class="user-rating__frame11"></div>
+    `;
+    }
     getUserPaginationBtnsSection() {
         return `
     <section class="pagination-btns-section">
@@ -6231,7 +6235,7 @@ class Main {
             case ('main'): {
                 this.wrapper.innerHTML += this.getWelcomeSection();
                 this.wrapper.innerHTML += this.getRequestSection();
-                this.wrapper.innerHTML += this.getThanksSection();
+                this.wrapper.innerHTML += this.getThanksSection((0,_controller_dataHandlers_thanksFilters__WEBPACK_IMPORTED_MODULE_4__.getAllThanksWithDescription)(_model_api_thanks__WEBPACK_IMPORTED_MODULE_3__.allThanks));
                 this.wrapper.innerHTML += this.getInfoSection();
                 break;
             }
@@ -6244,6 +6248,8 @@ class Main {
     }
 }
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -6251,9 +6257,10 @@ class Main {
 /*!********************************************!*\
   !*** ./src/components/view/modal/modal.ts ***!
   \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Modal)
@@ -6261,11 +6268,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../assets/img/Владимир.png */ "./src/components/assets/img/Владимир.png");
 /* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/img/Елена.png */ "./src/components/assets/img/Елена.png");
 /* harmony import */ var _assets_img_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/img/Светлана.png */ "./src/components/assets/img/Светлана.png");
-/* harmony import */ var _assets_img_magic_man_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/img/magic-man.png */ "./src/components/assets/img/magic-man.png");
+/* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
+/* harmony import */ var _controller_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../controller/dataHandlers/userFilters */ "./src/components/controller/dataHandlers/userFilters.ts");
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_model_api_users__WEBPACK_IMPORTED_MODULE_3__]);
+_model_api_users__WEBPACK_IMPORTED_MODULE_3__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
 
 
 
 
+
+
+const sortedUsers = (0,_controller_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_4__.getUsersRating)(_model_api_users__WEBPACK_IMPORTED_MODULE_3__.allUsers);
 class Modal {
     constructor() {
         this.wrapper = document.createElement('div');
@@ -6290,7 +6303,7 @@ class Modal {
                   <label for="register__avatar" class="modal__input file-style">Загрузите аватар</label>
                   <input type="file" class = "modal__input" id="register__avatar" name = "avatar">
                   <div class="modal-register__btns">
-                    <button class="btn modal__btn register__btn color-btn" type="submit">Зарегистрироваться</button>
+                    <button class="btn modal__btn register__btn color-btn" type="submit">Регистрация</button>
                     <button class="btn modal__btn register__btn-to-login">Войти</button>
                   </div>
                 </form>
@@ -6311,7 +6324,7 @@ class Modal {
                     placeholder="Введите ваш Пароль">
                   <div class="modal__btns">
                     <button class="btn modal__btn login__btn color-btn" type="submit">Войти</button>
-                    <button class="btn modal__btn login__btn-to-register">Зарегистрироваться</button>
+                    <button class="btn modal__btn login__btn-to-register">Регистрация</button>
                   </div>
                 </form>
               </div>
@@ -6410,7 +6423,7 @@ class Modal {
     <div class="modal close-request modal--hidden">
       <div class="modal__content close-request__content">
         <div class="modal__header">
-          <span class="modal__title">Выберите волонтера:</span>
+          <span class="modal__title">Выберите волонтеров:</span>
           <span class="modal__close">&times;</span>
         </div>
         <form action="" class="close-request__form">
@@ -6438,7 +6451,7 @@ class Modal {
             </label>
           </div>
           <h4 class="close-request__ta-title">Оставьте благодарность:</h4>
-          <textarea name="crTa" class="close-request__textarea" id="crTa"></textarea>
+          <textarea name="description" class="close-request__textarea" id="crTa"></textarea>
           <button class="btn close-request__form-btn" type="submit">Оставить благодарность</button>
         </form>
       </div>
@@ -6486,7 +6499,7 @@ class Modal {
           <h6 class="modal-rating__score-subtitle">Дела</h6>
         </div>
         <div class="modal-rating__body">
-          ${arr.map(item => this.renderRatingTable(item.ava, item.name, item.score)).join('')}
+          ${arr.map(item => this.renderRatingTable(item.avatar, item.name, item.goodThings)).join('')}
         </div>
       </div>
     </div>
@@ -6510,6 +6523,9 @@ class Modal {
     `;
     }
     getUserProfile() {
+        const user = (0,_model_api_users__WEBPACK_IMPORTED_MODULE_3__.getAuthUserData)();
+        if (!user)
+            return '';
         return `
     <div class="modal profile modal--hidden">
     <div class="modal__content profile__wrapper">
@@ -6521,31 +6537,25 @@ class Modal {
         <div class="user">
           <h6 class="user__title">Пользователь сайта</h6>
           <div class="user__img">
-            <img class="user__ava" src="${_assets_img_magic_man_png__WEBPACK_IMPORTED_MODULE_3__}" alt="Avatar">
+            <img class="user__ava" src="${user.avatar}" alt="Avatar">
+            <label for="change__avatar" class="modal__input file-style user__ava-choose">Загрузите аватар</label>       
           </div>
-          <h4 class="user__name">Волшебный Чел</h4>
-          <p class="user__location">Земли Ууу</p>
-          <p class="user__text">...О мелких людишках я быстро забываю</p>
+          <h4 class="user__name">${user.name}</h4>
         </div>
         <div class="user-info">
           <h6 class="user-info__title">История профиля</h6>
           <div class="user-info__content">
             <div class="user-info__subtitles">
-              <p class="user-info__subtitle">Зарегистрирован:</p>
-              <p class="user-info__subtitle">Страна:</p>
-              <p class="user-info__subtitle">Город:</p>
-              <p class="user-info__subtitle">Пол:</p>
-              <p class="user-info__subtitle">Возраст:</p>
+              <p class="user-info__subtitle">Логин:</p>
+              <p class="user-info__subtitle">Почта:</p>
               <p class="user-info__subtitle">Рейтинг:</p>
             </div>
             <form class="user-info__form">
               <div class="user-info__inputs">
-                <input type="text" class="user-info__input content__registered" placeholder="04-09-2022" disabled>
-                <input type="text" class="user-info__input content__country" placeholder="Земли Ууу">
-                <input type="text" class="user-info__input content__city" placeholder="Город Чудаков">
-                <input type="text" class="user-info__input content__sex" placeholder="Мужской">
-                <input type="text" class="user-info__input content__age" placeholder="200+">
-                <input type="text" class="user-info__input content__rating" placeholder="-999999999" disabled>
+                <input type="text" class="user-info__input content__sex" placeholder="${user.login}">
+                <input type="text" class="user-info__input content__age" placeholder="${user.email}">
+                <input type="text" class="user-info__input content__rating" placeholder="${user.goodThings}" disabled>
+                <input type="file" class="modal__input" id="change__avatar" name="avatar">
                 <input type="submit" class="user-info__submit-input" id="changeProfile">
               </div>
             </form>
@@ -6556,20 +6566,22 @@ class Modal {
     </div>
   </div>`;
     }
-    render(arr) {
+    render() {
         this.wrapper.innerHTML += this.getRegister();
         this.wrapper.innerHTML += this.getLogin();
         this.wrapper.innerHTML += this.getRequest();
+        this.wrapper.innerHTML += this.getCloseRequestWithHelp();
         this.wrapper.innerHTML += this.getCloseRequest();
         this.wrapper.innerHTML += this.getMessageEmail();
-        this.wrapper.innerHTML += this.getCloseRequestWithHelp();
-        this.wrapper.innerHTML += this.getRating(arr);
+        this.wrapper.innerHTML += this.getRating(sortedUsers);
         this.wrapper.innerHTML += this.getUserProfile();
         this.wrapper.classList.add('modal-wrapper');
         return this.wrapper;
     }
 }
 
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -15373,17 +15385,6 @@ module.exports = __webpack_require__.p + "assets/58f8073b2327d81b5a61.png";
 
 "use strict";
 module.exports = __webpack_require__.p + "assets/6c9f29c4eedd66b980f0.png";
-
-/***/ }),
-
-/***/ "./src/components/assets/img/magic-man.png":
-/*!*************************************************!*\
-  !*** ./src/components/assets/img/magic-man.png ***!
-  \*************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-module.exports = __webpack_require__.p + "assets/49aabc5994eb452c5e67.png";
 
 /***/ }),
 
