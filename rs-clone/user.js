@@ -4545,6 +4545,12 @@ function UserRating() {
     const newMain = new _view_main_main__WEBPACK_IMPORTED_MODULE_4__["default"]();
     usersMainSection.innerHTML = '';
     usersMainSection.innerHTML += newMain.getRating(sortedUsers);
+    const wrapper = document.querySelector('.user-section-main__wrapper');
+    const section = document.querySelector('.users-main-section');
+    const menuSection = document.querySelector('.menu-section');
+    wrapper.classList.add('u-rating-wrapper');
+    section.classList.add('u-rating-section');
+    menuSection.classList.add('u-rating-menu');
     openUserCloseRequestListener();
 }
 function renderUserRating() {
@@ -4693,6 +4699,7 @@ async function createApply(apply) {
             body: JSON.stringify(apply),
         });
         if (response.status === 200) {
+            setTimeout(() => window.location.href = "https://hartanovichev.github.io/RSClone-front/rs-clone/user.html", 2500);
             return (0,_utils_showMessage__WEBPACK_IMPORTED_MODULE_0__.showMessage)('Заявка успешно создана');
         }
         else
@@ -5996,7 +6003,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _model_api_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/api/users */ "./src/components/model/api/users.ts");
 /* harmony import */ var _model_api_thanks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/api/thanks */ "./src/components/model/api/thanks.ts");
 /* harmony import */ var _controller_dataHandlers_thanksFilters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../controller/dataHandlers/thanksFilters */ "./src/components/controller/dataHandlers/thanksFilters.ts");
-/* provided dependency */ var console = __webpack_require__(/*! ./node_modules/console-browserify/index.js */ "./node_modules/console-browserify/index.js");
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_model_api_users__WEBPACK_IMPORTED_MODULE_2__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_3__]);
 ([_model_api_users__WEBPACK_IMPORTED_MODULE_2__, _model_api_thanks__WEBPACK_IMPORTED_MODULE_3__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
@@ -6044,7 +6050,6 @@ class Main {
     renderThanksCard(item) {
         const participants = (0,_controller_dataHandlers_userFilters__WEBPACK_IMPORTED_MODULE_1__.getParticipantsInThanks)(_model_api_users__WEBPACK_IMPORTED_MODULE_2__.allUsers, item);
         const user = _model_api_users__WEBPACK_IMPORTED_MODULE_2__.allUsers.find(u => u.id === item.userId);
-        console.log(participants);
         return `
     <div class="card thanks-card">
       <div class="card__header thanks-card__header">              
@@ -6076,7 +6081,6 @@ class Main {
     `;
     }
     getUserThanksSection(arr) {
-        console.log(arr);
         return `
     <section class="thanks-section" id="thanks">
       <h2 class="thanks-section__title">Копилка добрых дел </h2>

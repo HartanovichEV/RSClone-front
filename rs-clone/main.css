@@ -1236,6 +1236,7 @@ body {
   width: 242px;
   height: 156px;
   background: url(assets/f826b5502c253e3175fa.png) 50%/contain no-repeat;
+  z-index: 0;
 }
 @media (max-width: 1200px) {
   .users-main-section__frame10 {
@@ -1259,6 +1260,7 @@ body {
 .menu-section {
   max-width: 14rem;
   position: relative;
+  z-index: 1;
 }
 @media (max-width: 768px) {
   .menu-section {
@@ -1384,6 +1386,25 @@ body {
 @media (max-width: 600px) {
   .user-rating__frame11 {
     display: none;
+  }
+}
+
+@media (max-width: 414px) {
+  .u-rating-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 414px) {
+  .u-rating-section {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 414px) {
+  .u-rating-menu {
+    margin: 0 auto;
   }
 }
 
