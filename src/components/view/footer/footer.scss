@@ -1,0 +1,43 @@
+.footer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+  text-align: center;
+  background: url(./components/assets/img/BG33.png) 50%/cover no-repeat;
+
+  &__logo-img {
+    width: 6rem;
+  }
+
+  &__links {
+    margin: 0.5rem;
+  }
+
+  &__link {
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0 0.2rem 0;
+  }
+
+  &__link:hover {
+    transition: all .3s ease;
+    transform: scale(1);
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    color: #221437;
+    text-shadow: 0 0 10px #221437,
+                0 0 20px #221437,
+                0 0 40px #221437,
+                0 0 60px #221437,
+                0 0 100px #221437;
+  }
+
+  &__year {
+    font-size: 1rem;
+  }
+}

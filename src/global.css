@@ -1,0 +1,84 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100&family=Roboto+Slab:wght@400;900&display=swap);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+input,button,textarea{
+  font-family: inherit;
+}
+* {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+a, a:visited, a:hover{
+  text-decoration: none;
+  color: #221437;
+}
+a:-webkit-any-link {
+  cursor: pointer;
+}
+body {   
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 23px;
+  color: #221437;
+  overflow-x:hidden; 
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.btn {
+  min-width: 130px;
+  min-height: 40px;
+  padding: 0.5rem;
+  margin: 15px 5px;
+  border: 3px solid #793CFB;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  background-color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #9a6bff;
+  border: 3px solid #9a6bff;
+  color: white;
+}
+.no-active{
+  border: 2px solid #CDCDCD;
+  color: #CDCDCD;
+  pointer-events: none;
+}
+.no-active:hover{
+  border: 2px solid #CDCDCD;
+  color: #CDCDCD;
+  background-color: #F6F6F6;
+  cursor: auto;
+}
+
+@import './components/view/header/header.scss';
+@import './components//view/main/main.scss';
+@import './components/view/footer/footer.scss';
+@import './components/view/modal/modal.scss';
